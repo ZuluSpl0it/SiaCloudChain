@@ -1915,7 +1915,7 @@ func TestContractorHostRemoval(t *testing.T) {
 	miner := tg.Miners()[0]
 
 	// Raise prices significantly for each host.
-	hostPrice := types.SiacoinPrecision.Mul64(5000) // 5 KS
+	hostPrice := types.ScPrimecoinPrecision.Mul64(5000) // 5 KS
 	for _, host := range hosts {
 		err = host.HostModifySettingPost(client.HostParamMinContractPrice, hostPrice)
 		if err != nil {

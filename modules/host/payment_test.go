@@ -279,7 +279,7 @@ func TestProcessPayment(t *testing.T) {
 // PayByContract payment method.
 func testPayByContract(t *testing.T, pair *renterHostPair) {
 	host := pair.staticHT.host
-	amount := types.SiacoinPrecision.Div64(2)
+	amount := types.ScPrimecoinPrecision.Div64(2)
 	amountStr := amount.HumanString()
 
 	// prepare an updated revision that pays the host
@@ -740,54 +740,54 @@ func TestStreams(t *testing.T) {
 func TestRevisionFromRequest(t *testing.T) {
 	recent := types.FileContractRevision{
 		NewValidProofOutputs: []types.SiacoinOutput{
-			{Value: types.SiacoinPrecision},
-			{Value: types.SiacoinPrecision},
+			{Value: types.ScPrimecoinPrecision},
+			{Value: types.ScPrimecoinPrecision},
 		},
 		NewMissedProofOutputs: []types.SiacoinOutput{
-			{Value: types.SiacoinPrecision},
-			{Value: types.SiacoinPrecision},
-			{Value: types.SiacoinPrecision},
+			{Value: types.ScPrimecoinPrecision},
+			{Value: types.ScPrimecoinPrecision},
+			{Value: types.ScPrimecoinPrecision},
 		},
 	}
 	pbcr := modules.PayByContractRequest{
 		NewValidProofValues: []types.Currency{
-			types.SiacoinPrecision.Mul64(10),
-			types.SiacoinPrecision.Mul64(100),
+			types.ScPrimecoinPrecision.Mul64(10),
+			types.ScPrimecoinPrecision.Mul64(100),
 		},
 		NewMissedProofValues: []types.Currency{
-			types.SiacoinPrecision.Mul64(1000),
-			types.SiacoinPrecision.Mul64(10000),
-			types.SiacoinPrecision.Mul64(100000),
+			types.ScPrimecoinPrecision.Mul64(1000),
+			types.ScPrimecoinPrecision.Mul64(10000),
+			types.ScPrimecoinPrecision.Mul64(100000),
 		},
 	}
 
 	// valid case
 	rev := revisionFromRequest(recent, pbcr)
-	if !rev.NewValidProofOutputs[0].Value.Equals(types.SiacoinPrecision.Mul64(10)) {
+	if !rev.NewValidProofOutputs[0].Value.Equals(types.ScPrimecoinPrecision.Mul64(10)) {
 		t.Fatal("valid output 0 doesn't match")
 	}
-	if !rev.NewValidProofOutputs[1].Value.Equals(types.SiacoinPrecision.Mul64(100)) {
+	if !rev.NewValidProofOutputs[1].Value.Equals(types.ScPrimecoinPrecision.Mul64(100)) {
 		t.Fatal("valid output 1 doesn't match")
 	}
-	if !rev.NewMissedProofOutputs[0].Value.Equals(types.SiacoinPrecision.Mul64(1000)) {
+	if !rev.NewMissedProofOutputs[0].Value.Equals(types.ScPrimecoinPrecision.Mul64(1000)) {
 		t.Fatal("missed output 0 doesn't match")
 	}
-	if !rev.NewMissedProofOutputs[1].Value.Equals(types.SiacoinPrecision.Mul64(10000)) {
+	if !rev.NewMissedProofOutputs[1].Value.Equals(types.ScPrimecoinPrecision.Mul64(10000)) {
 		t.Fatal("missed output 1 doesn't match")
 	}
-	if !rev.NewMissedProofOutputs[2].Value.Equals(types.SiacoinPrecision.Mul64(100000)) {
+	if !rev.NewMissedProofOutputs[2].Value.Equals(types.ScPrimecoinPrecision.Mul64(100000)) {
 		t.Fatal("missed output 2 doesn't match")
 	}
 
 	// too few valid outputs
 	pbcr = modules.PayByContractRequest{
 		NewValidProofValues: []types.Currency{
-			types.SiacoinPrecision.Mul64(10),
+			types.ScPrimecoinPrecision.Mul64(10),
 		},
 		NewMissedProofValues: []types.Currency{
-			types.SiacoinPrecision.Mul64(1000),
-			types.SiacoinPrecision.Mul64(10000),
-			types.SiacoinPrecision.Mul64(100000),
+			types.ScPrimecoinPrecision.Mul64(1000),
+			types.ScPrimecoinPrecision.Mul64(10000),
+			types.ScPrimecoinPrecision.Mul64(100000),
 		},
 	}
 	_ = revisionFromRequest(recent, pbcr)
@@ -795,14 +795,14 @@ func TestRevisionFromRequest(t *testing.T) {
 	// too many valid outputs
 	pbcr = modules.PayByContractRequest{
 		NewValidProofValues: []types.Currency{
-			types.SiacoinPrecision.Mul64(10),
-			types.SiacoinPrecision.Mul64(10),
-			types.SiacoinPrecision.Mul64(10),
+			types.ScPrimecoinPrecision.Mul64(10),
+			types.ScPrimecoinPrecision.Mul64(10),
+			types.ScPrimecoinPrecision.Mul64(10),
 		},
 		NewMissedProofValues: []types.Currency{
-			types.SiacoinPrecision.Mul64(1000),
-			types.SiacoinPrecision.Mul64(10000),
-			types.SiacoinPrecision.Mul64(100000),
+			types.ScPrimecoinPrecision.Mul64(1000),
+			types.ScPrimecoinPrecision.Mul64(10000),
+			types.ScPrimecoinPrecision.Mul64(100000),
 		},
 	}
 	_ = revisionFromRequest(recent, pbcr)
@@ -810,12 +810,12 @@ func TestRevisionFromRequest(t *testing.T) {
 	// too few missed outputs.
 	pbcr = modules.PayByContractRequest{
 		NewValidProofValues: []types.Currency{
-			types.SiacoinPrecision.Mul64(10),
-			types.SiacoinPrecision.Mul64(100),
+			types.ScPrimecoinPrecision.Mul64(10),
+			types.ScPrimecoinPrecision.Mul64(100),
 		},
 		NewMissedProofValues: []types.Currency{
-			types.SiacoinPrecision.Mul64(10000),
-			types.SiacoinPrecision.Mul64(100000),
+			types.ScPrimecoinPrecision.Mul64(10000),
+			types.ScPrimecoinPrecision.Mul64(100000),
 		},
 	}
 	_ = revisionFromRequest(recent, pbcr)
@@ -823,14 +823,14 @@ func TestRevisionFromRequest(t *testing.T) {
 	// too many missed outputs.
 	pbcr = modules.PayByContractRequest{
 		NewValidProofValues: []types.Currency{
-			types.SiacoinPrecision.Mul64(10),
-			types.SiacoinPrecision.Mul64(100),
+			types.ScPrimecoinPrecision.Mul64(10),
+			types.ScPrimecoinPrecision.Mul64(100),
 		},
 		NewMissedProofValues: []types.Currency{
-			types.SiacoinPrecision.Mul64(10000),
-			types.SiacoinPrecision.Mul64(100000),
-			types.SiacoinPrecision.Mul64(100000),
-			types.SiacoinPrecision.Mul64(100000),
+			types.ScPrimecoinPrecision.Mul64(10000),
+			types.ScPrimecoinPrecision.Mul64(100000),
+			types.ScPrimecoinPrecision.Mul64(100000),
+			types.ScPrimecoinPrecision.Mul64(100000),
 		},
 	}
 	_ = revisionFromRequest(recent, pbcr)

@@ -43,7 +43,7 @@ func TestEvictionPolicy(t *testing.T) {
 	// Create source outputs for transaction graphs.
 	var sources []types.SiacoinOutputID
 	numSources := 1
-	sourceSize := types.SiacoinPrecision.Mul64(1e3)
+	sourceSize := types.ScPrimecoinPrecision.Mul64(1e3)
 	var outputs []types.SiacoinOutput
 	for i := 0; i < numSources; i++ {
 		outputs = append(outputs, types.SiacoinOutput{
@@ -147,9 +147,9 @@ func TestEvictionPolicy(t *testing.T) {
 	// Add txn1, which consumes src1 and produces out1
 	_, err = graph1.AddTransaction(typesutil.SimpleTransaction{
 		SiacoinInputs:  []int{source1Index},
-		SiacoinOutputs: []types.Currency{types.SiacoinPrecision.Mul64(999)},
+		SiacoinOutputs: []types.Currency{types.ScPrimecoinPrecision.Mul64(999)},
 
-		MinerFees: []types.Currency{types.SiacoinPrecision},
+		MinerFees: []types.Currency{types.ScPrimecoinPrecision},
 	})
 	if err != nil {
 		t.Fatal(err)

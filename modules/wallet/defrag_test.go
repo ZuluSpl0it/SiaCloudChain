@@ -167,8 +167,8 @@ func TestDefragOutputExhaustion(t *testing.T) {
 					t.Error(err)
 					return
 				}
-				txnValue := types.SiacoinPrecision.Mul64(3000)
-				fee := types.SiacoinPrecision.Mul64(10)
+				txnValue := types.ScPrimecoinPrecision.Mul64(3000)
+				fee := types.ScPrimecoinPrecision.Mul64(10)
 				numOutputs := defragThreshold + 1
 
 				tbuilder, err := wt.wallet.StartTransaction()
@@ -212,7 +212,7 @@ func TestDefragOutputExhaustion(t *testing.T) {
 	// ensure we can still send transactions while receiving aggressively
 	// fragmented outputs
 	for i := 0; i < 30; i++ {
-		sendAmount := types.SiacoinPrecision.Mul64(2000)
+		sendAmount := types.ScPrimecoinPrecision.Mul64(2000)
 		_, err = wt.wallet.SendSiacoins(sendAmount, types.UnlockHash{})
 		if err != nil {
 			t.Errorf("%v: %v", i, err)

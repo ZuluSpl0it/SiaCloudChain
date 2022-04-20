@@ -56,8 +56,8 @@ func calculateWeightFromUInt64Price(price, collateral uint64) (weight types.Curr
 	hdb.blockHeight = 0
 
 	entry := DefaultHostDBEntry
-	entry.StoragePrice = types.NewCurrency64(price).Mul(types.SiacoinPrecision).Div(modules.BlockBytesPerMonthTerabyte)
-	entry.Collateral = types.NewCurrency64(collateral).Mul(types.SiacoinPrecision).Div(modules.BlockBytesPerMonthTerabyte)
+	entry.StoragePrice = types.NewCurrency64(price).Mul(types.ScPrimecoinPrecision).Div(modules.BlockBytesPerMonthTerabyte)
+	entry.Collateral = types.NewCurrency64(collateral).Mul(types.ScPrimecoinPrecision).Div(modules.BlockBytesPerMonthTerabyte)
 
 	return hdb.weightFunc(entry).Score()
 }

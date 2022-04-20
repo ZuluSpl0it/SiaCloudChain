@@ -436,8 +436,8 @@ func (api *API) daemonConstantsHandler(w http.ResponseWriter, _ *http.Request, _
 		MaxTargetAdjustmentUp:   types.MaxTargetAdjustmentUp,
 		MaxTargetAdjustmentDown: types.MaxTargetAdjustmentDown,
 
-		SiacoinPrecision:     types.SiacoinPrecision,
 		ScPrimecoinPrecision: types.ScPrimecoinPrecision,
+		SiacoinPrecision:     types.SiacoinPrecision,
 	}
 
 	WriteJSON(w, sc)

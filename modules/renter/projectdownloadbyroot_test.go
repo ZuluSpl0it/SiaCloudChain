@@ -16,7 +16,7 @@ func TestPDBRGouging(t *testing.T) {
 	// allowance contains only the fields necessary to test the price gouging
 	hes := modules.DefaultHostExternalSettings()
 	allowance := modules.Allowance{
-		Funds:                     types.SiacoinPrecision.Mul64(1e3),
+		Funds:                     types.ScPrimecoinPrecision.Mul64(1e3),
 		MaxDownloadBandwidthPrice: hes.DownloadBandwidthPrice.Mul64(10),
 		MaxUploadBandwidthPrice:   hes.UploadBandwidthPrice.Mul64(10),
 	}
@@ -68,7 +68,7 @@ func TestPDBRGouging(t *testing.T) {
 	// - exceeding the allowance of 1 KS, which is what we are after
 	pt.UploadBandwidthCost = allowance.MaxUploadBandwidthPrice
 	pt.DownloadBandwidthCost = allowance.MaxDownloadBandwidthPrice
-	pS := types.SiacoinPrecision.MulFloat(1e-12)
+	pS := types.ScPrimecoinPrecision.MulFloat(1e-12)
 	pt.InitBaseCost = pt.InitBaseCost.Add(pS.Mul64(250))
 	pt.ReadBaseCost = pt.ReadBaseCost.Add(pS.Mul64(250))
 	pt.MemoryTimeCost = pt.MemoryTimeCost.Add(pS.Mul64(250))
@@ -84,33 +84,33 @@ func TestPDBRGouging(t *testing.T) {
 		t.Fatal("unexpected price gouging failure", err)
 	}
 
-	allowance.Funds = types.SiacoinPrecision.Mul64(1e3) // reset
+	allowance.Funds = types.ScPrimecoinPrecision.Mul64(1e3) // reset
 
 	// verify bumping every individual cost component to an insane value results
 	// in a price gouging error
 	pt = newDefaultPriceTable()
-	pt.InitBaseCost = types.SiacoinPrecision.Mul64(100)
+	pt.InitBaseCost = types.ScPrimecoinPrecision.Mul64(100)
 	err = checkPDBRGouging(pt, allowance)
 	if err == nil || !strings.Contains(err.Error(), "combined PDBR pricing of host yields") {
 		t.Fatalf("expected PDBR price gouging error, instead error was '%v'", err)
 	}
 
 	pt = newDefaultPriceTable()
-	pt.ReadBaseCost = types.SiacoinPrecision
+	pt.ReadBaseCost = types.ScPrimecoinPrecision
 	err = checkPDBRGouging(pt, allowance)
 	if err == nil || !strings.Contains(err.Error(), "combined PDBR pricing of host yields") {
 		t.Fatalf("expected PDBR price gouging error, instead error was '%v'", err)
 	}
 
 	pt = newDefaultPriceTable()
-	pt.ReadLengthCost = types.SiacoinPrecision
+	pt.ReadLengthCost = types.ScPrimecoinPrecision
 	err = checkPDBRGouging(pt, allowance)
 	if err == nil || !strings.Contains(err.Error(), "combined PDBR pricing of host yields") {
 		t.Fatalf("expected PDBR price gouging error, instead error was '%v'", err)
 	}
 
 	pt = newDefaultPriceTable()
-	pt.MemoryTimeCost = types.SiacoinPrecision
+	pt.MemoryTimeCost = types.ScPrimecoinPrecision
 	err = checkPDBRGouging(pt, allowance)
 	if err == nil || !strings.Contains(err.Error(), "combined PDBR pricing of host yields") {
 		t.Fatalf("expected PDBR price gouging error, instead error was '%v'", err)

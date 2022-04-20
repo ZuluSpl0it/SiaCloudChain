@@ -73,7 +73,7 @@ func TestTransactionPoolRawHandlerPOST(t *testing.T) {
 	defer st4.panicClose()
 
 	// Create a transaction on one node and fetch it.
-	sentValue := types.SiacoinPrecision.Mul64(1000)
+	sentValue := types.ScPrimecoinPrecision.Mul64(1000)
 	txns, err := st.wallet.SendSiacoins(sentValue, types.UnlockHash{})
 	if err != nil {
 		t.Fatal(err)
@@ -218,7 +218,7 @@ func TestTransactionPoolConfirmed(t *testing.T) {
 	}
 
 	// Create a transaction.
-	sentValue := types.SiacoinPrecision.Mul64(1000)
+	sentValue := types.ScPrimecoinPrecision.Mul64(1000)
 	txns, err := st.wallet.SendSiacoins(sentValue, types.UnlockHash{})
 	if err != nil {
 		t.Fatal(err)

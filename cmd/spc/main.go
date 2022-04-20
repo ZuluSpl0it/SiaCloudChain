@@ -289,8 +289,8 @@ func main() {
 func initCmds() *cobra.Command {
 	root := &cobra.Command{
 		Use:   os.Args[0],
-		Short: "ScPrime Client v" + build.Version,
-		Long:  "ScPrime Client v" + build.Version,
+		Short: "SiaCloud Client (MK04) v" + build.Version + " based on ScPrime",
+		Long:  "SiaCloud Client (MK04) v" + build.Version + " based on ScPrime",
 		Run:   wrap(statuscmd),
 	}
 

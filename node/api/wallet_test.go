@@ -447,7 +447,7 @@ func TestIntegrationWalletSweepSeedPOST(t *testing.T) {
 		t.Fatal(err)
 	}
 	addr, _ := w.NextAddress()
-	st.wallet.SendSiacoins(types.SiacoinPrecision.Mul64(100), addr.UnlockHash())
+	st.wallet.SendSiacoins(types.ScPrimecoinPrecision.Mul64(100), addr.UnlockHash())
 	_, err = st.miner.AddBlock()
 	if err != nil {
 		t.Fatal(err)
@@ -465,8 +465,8 @@ func TestIntegrationWalletSweepSeedPOST(t *testing.T) {
 		t.Fatal(err)
 	}
 	// Should have swept more than 80 SCP
-	if wsp.Coins.Cmp(types.SiacoinPrecision.Mul64(80)) <= 0 {
-		t.Fatalf("swept fewer coins (%v SCP) than expected %v+", wsp.Coins.Div(types.SiacoinPrecision), 80)
+	if wsp.Coins.Cmp(types.ScPrimecoinPrecision.Mul64(80)) <= 0 {
+		t.Fatalf("swept fewer coins (%v SCP) than expected %v+", wsp.Coins.Div(types.ScPrimecoinPrecision), 80)
 	}
 
 	// Add a block so that the sweep transaction is processed
@@ -628,7 +628,7 @@ func TestWalletTransactionGETid(t *testing.T) {
 	//
 	// NOTE: We call the SendSiacoins method directly to get convenient access
 	// to the txid.
-	sentValue := types.SiacoinPrecision.Mul64(3)
+	sentValue := types.ScPrimecoinPrecision.Mul64(3)
 	txns, err := st.wallet.SendSiacoins(sentValue, types.UnlockHash{})
 	if err != nil {
 		t.Fatal(err)
@@ -1457,7 +1457,7 @@ func TestWalletSiacoins(t *testing.T) {
 	}
 
 	// Send 10KS in a single-send to st2.
-	sendAmount := types.SiacoinPrecision.Mul64(10000)
+	sendAmount := types.ScPrimecoinPrecision.Mul64(10000)
 	var wag WalletAddressGET
 	err = st2.getAPI("/wallet/address", &wag)
 	if err != nil {
@@ -1688,7 +1688,7 @@ func TestWalletManyTransactions(t *testing.T) {
 	// Send SC to each address.
 	minedBlocks := 0
 	for i, uc := range ucs {
-		st.wallet.SendSiacoins(types.SiacoinPrecision, uc.UnlockHash())
+		st.wallet.SendSiacoins(types.ScPrimecoinPrecision, uc.UnlockHash())
 		if i%100 == 0 {
 			if _, err := st.miner.AddBlock(); err != nil {
 				t.Fatal(err)
@@ -1758,7 +1758,7 @@ func TestWalletTransactionsGetAddr(t *testing.T) {
 	addr := uc.UnlockHash()
 
 	// Sent some money to the address
-	sentValue := types.SiacoinPrecision.Mul64(3)
+	sentValue := types.ScPrimecoinPrecision.Mul64(3)
 	_, err = st.wallet.SendSiacoins(sentValue, addr)
 	if err != nil {
 		t.Fatal(err)

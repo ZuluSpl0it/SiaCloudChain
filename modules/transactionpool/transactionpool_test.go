@@ -250,7 +250,7 @@ func TestFeeEstimation(t *testing.T) {
 	// transaction pool.
 	graphLens := 400                                                                     // 80 kb per graph
 	numGraphs := int(types.BlockSizeLimit) * blockFeeEstimationDepth / (graphLens * 206) // Enough to fill 'estimation depth' blocks.
-	graphFund := types.SiacoinPrecision.Mul64(1000)
+	graphFund := types.ScPrimecoinPrecision.Mul64(1000)
 	var outputs []types.SiacoinOutput
 	for i := 0; i < numGraphs+1; i++ {
 		outputs = append(outputs, types.SiacoinOutput{
@@ -277,7 +277,7 @@ func TestFeeEstimation(t *testing.T) {
 		var edges []types.TransactionGraphEdge
 		var cumFee types.Currency
 		for j := 0; j < graphLens; j++ {
-			fee := types.SiacoinPrecision.Mul64(uint64(j + i + 1)).Div64(200)
+			fee := types.ScPrimecoinPrecision.Mul64(uint64(j + i + 1)).Div64(200)
 			cumFee = cumFee.Add(fee)
 			edges = append(edges, types.TransactionGraphEdge{
 				Dest:   j + 1,
@@ -389,7 +389,7 @@ func TestTpoolScalability(t *testing.T) {
 	rows := 10                                         // needs to factor into exclusively '2's and '5's.
 	graphSize := 11796                                 // Measured with logging. Change if 'rows' changes.
 	numGraphs := TransactionPoolSizeTarget / graphSize // Enough to fill the transaction pool.
-	graphFund := types.SiacoinPrecision.Mul64(2000)
+	graphFund := types.ScPrimecoinPrecision.Mul64(2000)
 	var outputs []types.SiacoinOutput
 	for i := 0; i < numGraphs+1; i++ {
 		outputs = append(outputs, types.SiacoinOutput{
@@ -416,12 +416,12 @@ func TestTpoolScalability(t *testing.T) {
 		var edges []types.TransactionGraphEdge
 
 		// Create the root of the graph.
-		feeValues := types.SiacoinPrecision
+		feeValues := types.ScPrimecoinPrecision
 		firstRowValues := graphFund.Sub(feeValues.Mul64(uint64(rows))).Div64(uint64(rows))
 		for j := 0; j < rows; j++ {
 			edges = append(edges, types.TransactionGraphEdge{
 				Dest:   j + 1,
-				Fee:    types.SiacoinPrecision,
+				Fee:    types.ScPrimecoinPrecision,
 				Source: 0,
 				Value:  firstRowValues,
 			})
@@ -433,11 +433,11 @@ func TestTpoolScalability(t *testing.T) {
 		for j := 0; j < rows; j++ {
 			// Create the first node in the row, which has an increasing
 			// balance.
-			rowValue := firstRowValues.Sub(types.SiacoinPrecision.Mul64(uint64(j + 1)))
+			rowValue := firstRowValues.Sub(types.ScPrimecoinPrecision.Mul64(uint64(j + 1)))
 			firstNodeValue = firstNodeValue.Add(rowValue)
 			edges = append(edges, types.TransactionGraphEdge{
 				Dest:   nodeIndex + (rows - j),
-				Fee:    types.SiacoinPrecision,
+				Fee:    types.ScPrimecoinPrecision,
 				Source: nodeIndex,
 				Value:  firstNodeValue,
 			})
@@ -447,7 +447,7 @@ func TestTpoolScalability(t *testing.T) {
 			for k := j + 1; k < rows; k++ {
 				edges = append(edges, types.TransactionGraphEdge{
 					Dest:   nodeIndex + (rows - (j + 1)),
-					Fee:    types.SiacoinPrecision,
+					Fee:    types.ScPrimecoinPrecision,
 					Source: nodeIndex,
 					Value:  rowValue,
 				})
@@ -518,7 +518,7 @@ func TestHeapFees(t *testing.T) {
 	}
 
 	// Create transaction graph setup.
-	coinFrac := types.SiacoinPrecision
+	coinFrac := types.ScPrimecoinPrecision
 	numGraphs := 110
 	graphFund := coinFrac.Mul64(12210)
 	var outputs []types.SiacoinOutput
@@ -605,8 +605,8 @@ func TestHeapFees(t *testing.T) {
 
 	// Add up total fees
 	numTxns1 := 0
-	maxFee1 := types.SiacoinPrecision.Div64(1000000)
-	minFee1 := types.SiacoinPrecision.Mul64(1000000)
+	maxFee1 := types.ScPrimecoinPrecision.Div64(1000000)
+	minFee1 := types.ScPrimecoinPrecision.Mul64(1000000)
 	for _, txn := range block.Transactions {
 		for _, fee := range txn.MinerFees {
 			if fee.Cmp(maxFee1) >= 0 {
@@ -636,8 +636,8 @@ func TestHeapFees(t *testing.T) {
 
 	// Add up total fees
 	numTxns2 := 0
-	maxFee2 := types.SiacoinPrecision.Div64(1000000)
-	minFee2 := types.SiacoinPrecision.Mul64(1000000)
+	maxFee2 := types.ScPrimecoinPrecision.Div64(1000000)
+	minFee2 := types.ScPrimecoinPrecision.Mul64(1000000)
 	for _, txn := range block.Transactions {
 		for _, fee := range txn.MinerFees {
 			if fee.Cmp(maxFee2) >= 0 {
@@ -704,8 +704,8 @@ func TestBigTpool(t *testing.T) {
 	}
 
 	// Create transaction graph setup.
-	coinFrac := types.SiacoinPrecision.Div64(1)
-	feeFrac := types.SiacoinPrecision.Div64(10)
+	coinFrac := types.ScPrimecoinPrecision.Div64(1)
+	feeFrac := types.ScPrimecoinPrecision.Div64(10)
 	numGraphsPerChunk := 1000
 	transactionSetSizes := []int{1, 2, 5, 10, 20}
 
@@ -994,7 +994,7 @@ func TestBigTpool(t *testing.T) {
 		t.Fatal(err)
 	}
 	var totalFee1 types.Currency
-	minFee1 := types.SiacoinPrecision.Mul64(10000000000) // All the fees are much smaller than 1 SC.
+	minFee1 := types.ScPrimecoinPrecision.Mul64(10000000000) // All the fees are much smaller than 1 SC.
 	for _, tx := range block.Transactions {
 		for _, fee := range tx.MinerFees {
 			totalFee1 = totalFee1.Add(fee)
@@ -1010,7 +1010,7 @@ func TestBigTpool(t *testing.T) {
 	}
 	var totalFee2 types.Currency
 	maxFee2 := types.ZeroCurrency
-	minFee2 := types.SiacoinPrecision.Mul64(10000000000) // All the fees are much smaller than 1 SC.
+	minFee2 := types.ScPrimecoinPrecision.Mul64(10000000000) // All the fees are much smaller than 1 SC.
 	for _, tx := range block.Transactions {
 		for _, fee := range tx.MinerFees {
 			totalFee2 = totalFee2.Add(fee)
@@ -1029,7 +1029,7 @@ func TestBigTpool(t *testing.T) {
 	}
 	var totalFee3 types.Currency
 	maxFee3 := types.ZeroCurrency
-	minFee3 := types.SiacoinPrecision.Mul64(10000000000) // All the fees are much smaller than 1 SC.
+	minFee3 := types.ScPrimecoinPrecision.Mul64(10000000000) // All the fees are much smaller than 1 SC.
 	for _, tx := range block.Transactions {
 		for _, fee := range tx.MinerFees {
 			totalFee3 = totalFee3.Add(fee)
@@ -1140,7 +1140,7 @@ func TestTpoolRevert(t *testing.T) {
 	}
 
 	// Create transaction graph setup.
-	coinFrac := types.SiacoinPrecision
+	coinFrac := types.ScPrimecoinPrecision
 	numGraphs := 110
 	graphFund := coinFrac.Mul64(12210)
 	var outputs []types.SiacoinOutput
@@ -1265,8 +1265,8 @@ func TestTpoolRevert(t *testing.T) {
 		t.Fatal(err)
 	}
 	var totalFee1 types.Currency
-	maxFee1 := types.SiacoinPrecision.Div64(1000000)
-	minFee1 := types.SiacoinPrecision.Mul64(1000000)
+	maxFee1 := types.ScPrimecoinPrecision.Div64(1000000)
+	minFee1 := types.ScPrimecoinPrecision.Mul64(1000000)
 	for _, txn := range block.Transactions {
 		for _, fee := range txn.MinerFees {
 			if fee.Cmp(maxFee1) >= 0 {
@@ -1285,8 +1285,8 @@ func TestTpoolRevert(t *testing.T) {
 		t.Fatal(err)
 	}
 	var totalFee2 types.Currency
-	maxFee2 := types.SiacoinPrecision.Div64(1000000)
-	minFee2 := types.SiacoinPrecision.Mul64(1000000)
+	maxFee2 := types.ScPrimecoinPrecision.Div64(1000000)
+	minFee2 := types.ScPrimecoinPrecision.Mul64(1000000)
 	for _, txn := range block.Transactions {
 		for _, fee := range txn.MinerFees {
 			if fee.Cmp(maxFee2) >= 0 {
@@ -1300,7 +1300,7 @@ func TestTpoolRevert(t *testing.T) {
 	}
 
 	totalFeeAcrossBlocks := totalFeeRandBlock.Add(totalFee1).Add(totalFee2)
-	totalExpectedFee := types.SiacoinPrecision.Mul64(13860).Add(types.SiacoinPrecision.Mul64(321915))
+	totalExpectedFee := types.ScPrimecoinPrecision.Mul64(13860).Add(types.ScPrimecoinPrecision.Mul64(321915))
 	if totalFeeAcrossBlocks.Cmp(totalExpectedFee) != 0 {
 		t.Error("Fee different from expected.")
 	}

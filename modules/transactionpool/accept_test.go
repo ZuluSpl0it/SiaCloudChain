@@ -138,7 +138,7 @@ func TestCheckMinerFees(t *testing.T) {
 	// transaction pool.
 	graphLens := 200                                                          // 40 kb per graph
 	numGraphs := (int(TransactionPoolSizeTarget) * 4 / 3) / (graphLens * 206) // 206 is the size of a single input-output graph txn.
-	graphFund := types.SiacoinPrecision.Mul64(1000)
+	graphFund := types.ScPrimecoinPrecision.Mul64(1000)
 	var outputs []types.SiacoinOutput
 	for i := 0; i < numGraphs+1; i++ {
 		outputs = append(outputs, types.SiacoinOutput{
@@ -186,7 +186,7 @@ func TestCheckMinerFees(t *testing.T) {
 	}
 
 	// Add a transaction that has sufficient fees.
-	_, err = tpt.wallet.SendSiacoins(types.SiacoinPrecision.Mul64(50), types.UnlockHash{})
+	_, err = tpt.wallet.SendSiacoins(types.ScPrimecoinPrecision.Mul64(50), types.UnlockHash{})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -198,9 +198,9 @@ func TestCheckMinerFees(t *testing.T) {
 		for j := 0; j < graphLens; j++ {
 			edges = append(edges, types.TransactionGraphEdge{
 				Dest:   j + 1,
-				Fee:    types.SiacoinPrecision,
+				Fee:    types.ScPrimecoinPrecision,
 				Source: j,
-				Value:  graphFund.Sub(types.SiacoinPrecision.Mul64(uint64(j + 1))),
+				Value:  graphFund.Sub(types.ScPrimecoinPrecision.Mul64(uint64(j + 1))),
 			})
 		}
 		graph, err := types.TransactionGraph(finalTxn.SiacoinOutputID(uint64(i)), edges)
@@ -215,8 +215,8 @@ func TestCheckMinerFees(t *testing.T) {
 
 	// Try to submit a transaction with too few fees.
 	source := finalTxn.SiacoinOutputID(uint64(numGraphs))
-	lowFee := types.SiacoinPrecision.Div64(3)
-	remaining := types.SiacoinPrecision.Mul64(1000).Sub(lowFee)
+	lowFee := types.ScPrimecoinPrecision.Div64(3)
+	remaining := types.ScPrimecoinPrecision.Mul64(1000).Sub(lowFee)
 	edge := types.TransactionGraphEdge{
 		Dest:   1,
 		Fee:    lowFee,
@@ -249,7 +249,7 @@ func TestTransactionGraph(t *testing.T) {
 
 	// Create a transaction sending money to an output that TransactionGraph can
 	// spent (the empty UnlockConditions).
-	txns, err := tpt.wallet.SendSiacoins(types.SiacoinPrecision.Mul64(100), types.UnlockConditions{}.UnlockHash())
+	txns, err := tpt.wallet.SendSiacoins(types.ScPrimecoinPrecision.Mul64(100), types.UnlockConditions{}.UnlockHash())
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -258,9 +258,9 @@ func TestTransactionGraph(t *testing.T) {
 	graphSourceOutputID := txns[len(txns)-1].SiacoinOutputID(0)
 	edge := types.TransactionGraphEdge{
 		Dest:   1,
-		Fee:    types.SiacoinPrecision.Mul64(10),
+		Fee:    types.ScPrimecoinPrecision.Mul64(10),
 		Source: 0,
-		Value:  types.SiacoinPrecision.Mul64(90),
+		Value:  types.ScPrimecoinPrecision.Mul64(90),
 	}
 	graphTxns, err := types.TransactionGraph(graphSourceOutputID, []types.TransactionGraphEdge{edge})
 	if err != nil {
@@ -291,7 +291,7 @@ func TestTransactionGraphDiamond(t *testing.T) {
 
 	// Create a transaction sending money to an output that TransactionGraph can
 	// spent (the empty UnlockConditions).
-	txns, err := tpt.wallet.SendSiacoins(types.SiacoinPrecision.Mul64(100), types.UnlockConditions{}.UnlockHash())
+	txns, err := tpt.wallet.SendSiacoins(types.ScPrimecoinPrecision.Mul64(100), types.UnlockConditions{}.UnlockHash())
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -306,9 +306,9 @@ func TestTransactionGraphDiamond(t *testing.T) {
 	for i := range sources {
 		edges = append(edges, types.TransactionGraphEdge{
 			Dest:   dests[i],
-			Fee:    types.SiacoinPrecision.Mul64(fees[i]),
+			Fee:    types.ScPrimecoinPrecision.Mul64(fees[i]),
 			Source: sources[i],
-			Value:  types.SiacoinPrecision.Mul64(values[i]),
+			Value:  types.ScPrimecoinPrecision.Mul64(values[i]),
 		})
 	}
 	graphTxns, err := types.TransactionGraph(graphSourceOutputID, edges)

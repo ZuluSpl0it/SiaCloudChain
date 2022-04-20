@@ -143,7 +143,7 @@ var (
 
 	// DefaultMaxEphemeralAccountBalance defines the default maximum amount of
 	// money that the host will allow to deposit into a single ephemeral account
-	DefaultMaxEphemeralAccountBalance = types.SiacoinPrecision
+	DefaultMaxEphemeralAccountBalance = types.ScPrimecoinPrecision
 
 	// DefaultSectorAccessPrice defines the default price of a sector access. It
 	// is roughly equal to the cost of downloading 64 KiB.
@@ -171,7 +171,7 @@ var (
 	// CompatV1412DefaultMaxEphemeralAccountBalance defines the default maximum
 	// ephemeral account balance used up until v1.4.12. This constant is added
 	// to ensure changing the default does not break legacy checks.
-	CompatV1412DefaultMaxEphemeralAccountBalance = types.SiacoinPrecision
+	CompatV1412DefaultMaxEphemeralAccountBalance = types.ScPrimecoinPrecision
 )
 
 var (

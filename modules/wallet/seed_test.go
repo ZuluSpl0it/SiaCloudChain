@@ -199,7 +199,7 @@ func TestSweepSeedCoins(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	_, err = wt.wallet.SendSiacoins(types.SiacoinPrecision, uc.UnlockHash())
+	_, err = wt.wallet.SendSiacoins(types.ScPrimecoinPrecision, uc.UnlockHash())
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -473,7 +473,7 @@ func TestSweepSeedCoinsAndFunds(t *testing.T) {
 	// Send some siacoins to the address -- must be more than the transaction
 	// fee.
 	for i := 0; i < 100; i++ {
-		_, err = wt.wallet.SendSiacoins(types.SiacoinPrecision.Mul64(10), sk.UnlockConditions.UnlockHash())
+		_, err = wt.wallet.SendSiacoins(types.ScPrimecoinPrecision.Mul64(10), sk.UnlockConditions.UnlockHash())
 		if err != nil {
 			t.Fatal(err)
 		}

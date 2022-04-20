@@ -54,7 +54,7 @@ func TestTransactionReorg(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	wsp, err := miner1.WalletSiacoinsPost(types.SiacoinPrecision, uc.Address, false)
+	wsp, err := miner1.WalletSiacoinsPost(types.ScPrimecoinPrecision, uc.Address, false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -246,7 +246,7 @@ func TestWatchOnly(t *testing.T) {
 	}
 	addr := uc.UnlockHash()
 
-	_, err = testNode.WalletSiacoinsPost(types.SiacoinPrecision.Mul64(77), addr, false)
+	_, err = testNode.WalletSiacoinsPost(types.ScPrimecoinPrecision.Mul64(77), addr, false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -358,7 +358,7 @@ func TestUnspentOutputs(t *testing.T) {
 	// create a dummy address and send coins to it
 	addr := types.UnlockHash{1}
 
-	_, err = testNode.WalletSiacoinsPost(types.SiacoinPrecision.Mul64(77), addr, false)
+	_, err = testNode.WalletSiacoinsPost(types.ScPrimecoinPrecision.Mul64(77), addr, false)
 	if err != nil {
 		t.Fatal(err)
 	}

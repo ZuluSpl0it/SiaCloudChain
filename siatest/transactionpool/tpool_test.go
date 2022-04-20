@@ -44,7 +44,7 @@ func TestTpoolTransactionsGet(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	_, err = miner.WalletSiacoinsPost(types.SiacoinPrecision, uc.Address, false)
+	_, err = miner.WalletSiacoinsPost(types.ScPrimecoinPrecision, uc.Address, false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -108,7 +108,7 @@ func TestTPoolTransactionConfirmed(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	wsp, err := miner.WalletSiacoinsPost(types.SiacoinPrecision, uc.Address, false)
+	wsp, err := miner.WalletSiacoinsPost(types.ScPrimecoinPrecision, uc.Address, false)
 	if err != nil {
 		t.Fatal(err)
 	}

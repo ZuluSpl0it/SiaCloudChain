@@ -52,7 +52,7 @@ func TestPubkeysToContractIDMap(t *testing.T) {
 	c.mu.Unlock()
 
 	// form a contract with the host
-	_, contract, err := c.managedNewContract(hostEntry, types.SiacoinPrecision.Mul64(50), c.blockHeight+100)
+	_, contract, err := c.managedNewContract(hostEntry, types.ScPrimecoinPrecision.Mul64(50), c.blockHeight+100)
 	if err != nil {
 		t.Fatal(err)
 	}

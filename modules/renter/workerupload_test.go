@@ -22,7 +22,7 @@ func TestCheckUploadGouging(t *testing.T) {
 		// Funds is set such that the tests come out to an easy, round number.
 		// One siacoin is multiplied by the number of elements that are checked
 		// for gouging, and then divided by the gounging denominator.
-		Funds:  types.SiacoinPrecision.Mul64(4).Div64(uploadGougingFractionDenom).Sub(oneCurrency),
+		Funds:  types.ScPrimecoinPrecision.Mul64(4).Div64(uploadGougingFractionDenom).Sub(oneCurrency),
 		Period: 1, // 1 block.
 
 		ExpectedStorage: modules.StreamUploadSize, // 1 stream upload operation.
@@ -33,10 +33,10 @@ func TestCheckUploadGouging(t *testing.T) {
 	// The cost is set to be exactly equal to the price gouging limit, such that
 	// slightly decreasing any of the values evades the price gouging detector.
 	minHostSettings := modules.HostExternalSettings{
-		BaseRPCPrice:         types.SiacoinPrecision,
-		SectorAccessPrice:    types.SiacoinPrecision,
-		UploadBandwidthPrice: types.SiacoinPrecision.Div64(modules.StreamUploadSize),
-		StoragePrice:         types.SiacoinPrecision.Div64(modules.StreamUploadSize),
+		BaseRPCPrice:         types.ScPrimecoinPrecision,
+		SectorAccessPrice:    types.ScPrimecoinPrecision,
+		UploadBandwidthPrice: types.ScPrimecoinPrecision.Div64(modules.StreamUploadSize),
+		StoragePrice:         types.ScPrimecoinPrecision.Div64(modules.StreamUploadSize),
 	}
 
 	err := checkUploadGouging(minAllowance, minHostSettings)
@@ -74,12 +74,12 @@ func TestCheckUploadGouging(t *testing.T) {
 	// acceptable.
 	maxAllowance := minAllowance
 	maxAllowance.Funds = maxAllowance.Funds.Add(oneCurrency)
-	maxAllowance.MaxRPCPrice = types.SiacoinPrecision.Add(oneCurrency)
+	maxAllowance.MaxRPCPrice = types.ScPrimecoinPrecision.Add(oneCurrency)
 	maxAllowance.MaxContractPrice = oneCurrency
 	maxAllowance.MaxDownloadBandwidthPrice = oneCurrency
-	maxAllowance.MaxSectorAccessPrice = types.SiacoinPrecision.Add(oneCurrency)
-	maxAllowance.MaxStoragePrice = types.SiacoinPrecision.Div64(modules.StreamUploadSize).Add(oneCurrency)
-	maxAllowance.MaxUploadBandwidthPrice = types.SiacoinPrecision.Div64(modules.StreamUploadSize).Add(oneCurrency)
+	maxAllowance.MaxSectorAccessPrice = types.ScPrimecoinPrecision.Add(oneCurrency)
+	maxAllowance.MaxStoragePrice = types.ScPrimecoinPrecision.Div64(modules.StreamUploadSize).Add(oneCurrency)
+	maxAllowance.MaxUploadBandwidthPrice = types.ScPrimecoinPrecision.Div64(modules.StreamUploadSize).Add(oneCurrency)
 
 	// The max allowance should have no issues with price gouging.
 	err = checkUploadGouging(maxAllowance, minHostSettings)
@@ -89,7 +89,7 @@ func TestCheckUploadGouging(t *testing.T) {
 
 	// Should fail if the MaxRPCPrice is dropped.
 	failAllowance := maxAllowance
-	failAllowance.MaxRPCPrice = types.SiacoinPrecision.Sub(oneCurrency)
+	failAllowance.MaxRPCPrice = types.ScPrimecoinPrecision.Sub(oneCurrency)
 	err = checkUploadGouging(failAllowance, minHostSettings)
 	if err == nil {
 		t.Error("expecting price gouging check to fail")
@@ -97,7 +97,7 @@ func TestCheckUploadGouging(t *testing.T) {
 
 	// Should fail if the MaxSectorAccessPrice is dropped.
 	failAllowance = maxAllowance
-	failAllowance.MaxSectorAccessPrice = types.SiacoinPrecision.Sub(oneCurrency)
+	failAllowance.MaxSectorAccessPrice = types.ScPrimecoinPrecision.Sub(oneCurrency)
 	err = checkUploadGouging(failAllowance, minHostSettings)
 	if err == nil {
 		t.Error("expecting price gouging check to fail")
@@ -105,7 +105,7 @@ func TestCheckUploadGouging(t *testing.T) {
 
 	// Should fail if the MaxStoragePrice is dropped.
 	failAllowance = maxAllowance
-	failAllowance.MaxStoragePrice = types.SiacoinPrecision.Div64(modules.StreamUploadSize).Sub(oneCurrency)
+	failAllowance.MaxStoragePrice = types.ScPrimecoinPrecision.Div64(modules.StreamUploadSize).Sub(oneCurrency)
 	err = checkUploadGouging(failAllowance, minHostSettings)
 	if err == nil {
 		t.Error("expecting price gouging check to fail")
@@ -113,7 +113,7 @@ func TestCheckUploadGouging(t *testing.T) {
 
 	// Should fail if the MaxUploadBandwidthPrice is dropped.
 	failAllowance = maxAllowance
-	failAllowance.MaxUploadBandwidthPrice = types.SiacoinPrecision.Div64(modules.StreamUploadSize).Sub(oneCurrency)
+	failAllowance.MaxUploadBandwidthPrice = types.ScPrimecoinPrecision.Div64(modules.StreamUploadSize).Sub(oneCurrency)
 	err = checkUploadGouging(failAllowance, minHostSettings)
 	if err == nil {
 		t.Error("expecting price gouging check to fail")

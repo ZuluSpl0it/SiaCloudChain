@@ -1187,7 +1187,7 @@ func TestRenterAllowance(t *testing.T) {
 
 	// Set an allowance for the renter, allowing a contract to be formed.
 	allowanceValues := url.Values{}
-	testFunds := types.SiacoinPrecision.Mul64(10000) // 10k SC
+	testFunds := types.ScPrimecoinPrecision.Mul64(10000) // 10k SC
 	testPeriod := 20
 	allowanceValues.Set("funds", testFunds.String())
 	allowanceValues.Set("period", strconv.Itoa(testPeriod))

@@ -1440,7 +1440,7 @@ func TestAdversarialPriceRenewal(t *testing.T) {
 	// Set an allowance for the renter, allowing a contract to be formed.
 	allowanceValues := url.Values{}
 	testPeriod := "10000"
-	allowanceValues.Set("funds", types.SiacoinPrecision.Mul64(10000).String())
+	allowanceValues.Set("funds", types.ScPrimecoinPrecision.Mul64(10000).String())
 	allowanceValues.Set("period", testPeriod)
 	err = st.stdPostAPI("/renter", allowanceValues)
 	if err != nil {

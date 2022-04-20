@@ -125,7 +125,7 @@ func TestEstimateWeight(t *testing.T) {
 	}
 	for i, tester := range sts {
 		is = tester.host.InternalSettings()
-		is.MinContractPrice = types.SiacoinPrecision.Mul64(1000 + (1000 * uint64(i)))
+		is.MinContractPrice = types.ScPrimecoinPrecision.Mul64(1000 + (1000 * uint64(i)))
 		err = tester.host.SetInternalSettings(is)
 		if err != nil {
 			t.Fatal(err)
@@ -140,11 +140,11 @@ func TestEstimateWeight(t *testing.T) {
 		price             types.Currency
 		minConversionRate float64
 	}{
-		{types.SiacoinPrecision, 100},
-		{types.SiacoinPrecision.Mul64(50), 98},
-		{types.SiacoinPrecision.Mul64(2500), 10},
-		{types.SiacoinPrecision.Mul64(3000), 1},
-		{types.SiacoinPrecision.Mul64(20000), 0.00001},
+		{types.ScPrimecoinPrecision, 100},
+		{types.ScPrimecoinPrecision.Mul64(50), 98},
+		{types.ScPrimecoinPrecision.Mul64(2500), 10},
+		{types.ScPrimecoinPrecision.Mul64(3000), 1},
+		{types.ScPrimecoinPrecision.Mul64(20000), 0.00001},
 	}
 	for i, test := range tests {
 		var eg HostEstimateScoreGET

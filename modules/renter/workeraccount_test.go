@@ -98,13 +98,13 @@ func testAccountCheckFundAccountGouging(t *testing.T) {
 
 	// allowance contains only the fields necessary to test the price gouging
 	allowance := modules.Allowance{
-		Funds: types.SiacoinPrecision.Mul64(1e3),
+		Funds: types.ScPrimecoinPrecision.Mul64(1e3),
 	}
 
 	// set the target balance to 1SC, this is necessary because this decides how
 	// frequently we refill the account, which is a required piece of knowledge
 	// in order to estimate the total cost of refilling
-	targetBalance := types.SiacoinPrecision
+	targetBalance := types.ScPrimecoinPrecision
 
 	// verify happy case
 	pt := newDefaultPriceTable()
@@ -117,7 +117,7 @@ func testAccountCheckFundAccountGouging(t *testing.T) {
 	// cost to an unreasonable amount, empirically we found 75mS to be such a
 	// value for the given parameters (1000SC funds and TB of 1SC)
 	pt = newDefaultPriceTable()
-	pt.FundAccountCost = types.SiacoinPrecision.MulFloat(0.075)
+	pt.FundAccountCost = types.ScPrimecoinPrecision.MulFloat(0.075)
 	err = checkFundAccountGouging(pt, allowance, targetBalance)
 	if err == nil || !strings.Contains(err.Error(), "fund account cost") {
 		t.Fatalf("expected fund account cost gouging error, instead error was '%v'", err)
@@ -278,7 +278,7 @@ func testAccountTracking(t *testing.T, rt *renterTester) {
 	}
 
 	// verify tracking a deposit properly alters the account state
-	deposit := types.SiacoinPrecision
+	deposit := types.ScPrimecoinPrecision
 	account.managedTrackDeposit(deposit)
 	if !account.pendingDeposits.Equals(deposit) {
 		t.Log(account.pendingDeposits)
@@ -304,7 +304,7 @@ func testAccountTracking(t *testing.T, rt *renterTester) {
 	}
 
 	// verify tracking a withdrawal properly alters the account state
-	withdrawal := types.SiacoinPrecision.Div64(100)
+	withdrawal := types.ScPrimecoinPrecision.Div64(100)
 	account.managedTrackWithdrawal(withdrawal)
 	if !account.pendingWithdrawals.Equals(withdrawal) {
 		t.Log(account.pendingWithdrawals)

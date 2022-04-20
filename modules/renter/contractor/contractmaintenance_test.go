@@ -25,16 +25,16 @@ func TestCheckFormContractGouging(t *testing.T) {
 	// The cost is set to be exactly equal to the price gouging limit, such that
 	// slightly decreasing any of the values evades the price gouging detector.
 	minHostSettings := modules.HostExternalSettings{
-		BaseRPCPrice:  types.SiacoinPrecision,
-		ContractPrice: types.SiacoinPrecision,
+		BaseRPCPrice:  types.ScPrimecoinPrecision,
+		ContractPrice: types.ScPrimecoinPrecision,
 	}
 
 	// Set min settings on the allowance that are just below that should be
 	// acceptable.
 	maxAllowance := minAllowance
 	maxAllowance.Funds = maxAllowance.Funds.Add(oneCurrency)
-	maxAllowance.MaxRPCPrice = types.SiacoinPrecision.Add(oneCurrency)
-	maxAllowance.MaxContractPrice = types.SiacoinPrecision.Add(oneCurrency)
+	maxAllowance.MaxRPCPrice = types.ScPrimecoinPrecision.Add(oneCurrency)
+	maxAllowance.MaxContractPrice = types.ScPrimecoinPrecision.Add(oneCurrency)
 	maxAllowance.MaxDownloadBandwidthPrice = oneCurrency
 	maxAllowance.MaxSectorAccessPrice = oneCurrency
 	maxAllowance.MaxStoragePrice = oneCurrency
@@ -48,7 +48,7 @@ func TestCheckFormContractGouging(t *testing.T) {
 
 	// Should fail if the MaxRPCPrice is dropped.
 	failAllowance := maxAllowance
-	failAllowance.MaxRPCPrice = types.SiacoinPrecision.Sub(oneCurrency)
+	failAllowance.MaxRPCPrice = types.ScPrimecoinPrecision.Sub(oneCurrency)
 	err = checkFormContractGouging(failAllowance, minHostSettings)
 	if err == nil {
 		t.Fatal("expecting price gouging check to fail")
@@ -56,7 +56,7 @@ func TestCheckFormContractGouging(t *testing.T) {
 
 	// Should fail if the MaxContractPrice is dropped.
 	failAllowance = maxAllowance
-	failAllowance.MaxContractPrice = types.SiacoinPrecision.Sub(oneCurrency)
+	failAllowance.MaxContractPrice = types.ScPrimecoinPrecision.Sub(oneCurrency)
 	err = checkFormContractGouging(failAllowance, minHostSettings)
 	if err == nil {
 		t.Fatal("expecting price gouging check to fail")

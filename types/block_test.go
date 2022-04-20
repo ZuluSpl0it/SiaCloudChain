@@ -12,26 +12,26 @@ import (
 // is probably too similar to the function code to be of value.
 func TestCalculateCoinbase(t *testing.T) {
 	c := CalculateCoinbase(0)
-	if c.Cmp(NewCurrency64(InitialCoinbase).Mul(SiacoinPrecision)) != 0 {
+	if c.Cmp(NewCurrency64(InitialCoinbase).Mul(ScPrimecoinPrecision)) != 0 {
 		t.Error("Unexpected CalculateCoinbase result")
 	}
 
 	c = CalculateCoinbase(1)
-	if c.Cmp(NewCurrency64(InitialCoinbase-1).Mul(SiacoinPrecision)) != 0 {
+	if c.Cmp(NewCurrency64(InitialCoinbase-1).Mul(ScPrimecoinPrecision)) != 0 {
 		t.Error("Unexpected CalculateCoinbase result")
 	}
 
 	c = CalculateCoinbase(295000)
-	if c.Cmp(NewCurrency64(MinimumCoinbase).Mul(SiacoinPrecision)) != 0 {
+	if c.Cmp(NewCurrency64(MinimumCoinbase).Mul(ScPrimecoinPrecision)) != 0 {
 		t.Error(c)
-		t.Error(NewCurrency64(MinimumCoinbase).Mul(SiacoinPrecision))
+		t.Error(NewCurrency64(MinimumCoinbase).Mul(ScPrimecoinPrecision))
 		t.Error("Unexpected CalculateCoinbase result")
 	}
 
 	c = CalculateCoinbase(1000000000)
-	if c.Cmp(NewCurrency64(MinimumCoinbase).Mul(SiacoinPrecision)) != 0 {
+	if c.Cmp(NewCurrency64(MinimumCoinbase).Mul(ScPrimecoinPrecision)) != 0 {
 		t.Error(c)
-		t.Error(NewCurrency64(MinimumCoinbase).Mul(SiacoinPrecision))
+		t.Error(NewCurrency64(MinimumCoinbase).Mul(ScPrimecoinPrecision))
 		t.Error("Unexpected CalculateCoinbase result")
 	}
 }
@@ -41,7 +41,7 @@ func TestCalculateCoinbase(t *testing.T) {
 // doing a naive computation, instead of by doing the optimized computation.
 func TestCalculateNumSiacoins(t *testing.T) {
 	c := CalculateNumSiacoins(0)
-	if c.Cmp(CalculateCoinbase(0).Add(AirdropCommunityValue).Add(AirdropNebulousLabsValue).Add(AirdropPoolValue).Add(AirdropSiaPrimeValue)) != 0 {
+	if c.Cmp(CalculateCoinbase(0).Add(AirdropCommunityValue).Add(AirdropSiaPrimeValue).Add(AirdropPoolValue).Add(AirdropSiaCloudValue)) != 0 {
 		t.Error("unexpected circulation result for value 0, got", c)
 	}
 
@@ -49,7 +49,7 @@ func TestCalculateNumSiacoins(t *testing.T) {
 		t.SkipNow()
 	}
 	//totalCoins := NewCurrency64(0).Add(numGenesisSiacoins) // TODO: check this
-	totalCoins := NewCurrency64(0).Add(AirdropCommunityValue).Add(AirdropNebulousLabsValue).Add(AirdropPoolValue).Add(AirdropSiaPrimeValue)
+	totalCoins := NewCurrency64(0).Add(AirdropCommunityValue).Add(AirdropSiaPrimeValue).Add(AirdropPoolValue).Add(AirdropSiaCloudValue)
 
 	for i := BlockHeight(0); i < 500e3; i++ {
 		totalCoins = totalCoins.Add(CalculateCoinbase(i))

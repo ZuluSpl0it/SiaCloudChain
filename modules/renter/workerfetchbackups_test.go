@@ -19,7 +19,7 @@ func TestCheckFetchBackupsGouging(t *testing.T) {
 		// Funds is set such that the tests come out to an easy, round number.
 		// One siacoin is multiplied by the number of elements that are checked
 		// for gouging, and then divided by the gounging denominator.
-		Funds: types.SiacoinPrecision.Mul64(3).Div64(fetchBackupsGougingFractionDenom).Sub(oneCurrency),
+		Funds: types.ScPrimecoinPrecision.Mul64(3).Div64(fetchBackupsGougingFractionDenom).Sub(oneCurrency),
 
 		ExpectedDownload: modules.StreamDownloadSize, // 1 stream download operation.
 	}
@@ -29,9 +29,9 @@ func TestCheckFetchBackupsGouging(t *testing.T) {
 	// The cost is set to be exactly equal to the price gouging limit, such that
 	// slightly decreasing any of the values evades the price gouging detector.
 	minHostSettings := modules.HostExternalSettings{
-		BaseRPCPrice:           types.SiacoinPrecision,
-		DownloadBandwidthPrice: types.SiacoinPrecision.Div64(modules.StreamDownloadSize),
-		SectorAccessPrice:      types.SiacoinPrecision,
+		BaseRPCPrice:           types.ScPrimecoinPrecision,
+		DownloadBandwidthPrice: types.ScPrimecoinPrecision.Div64(modules.StreamDownloadSize),
+		SectorAccessPrice:      types.ScPrimecoinPrecision,
 	}
 
 	err := checkFetchBackupsGouging(minAllowance, minHostSettings)
@@ -63,10 +63,10 @@ func TestCheckFetchBackupsGouging(t *testing.T) {
 	// acceptable.
 	maxAllowance := minAllowance
 	maxAllowance.Funds = maxAllowance.Funds.Add(oneCurrency)
-	maxAllowance.MaxRPCPrice = types.SiacoinPrecision.Add(oneCurrency)
+	maxAllowance.MaxRPCPrice = types.ScPrimecoinPrecision.Add(oneCurrency)
 	maxAllowance.MaxContractPrice = oneCurrency
-	maxAllowance.MaxDownloadBandwidthPrice = types.SiacoinPrecision.Div64(modules.StreamDownloadSize).Add(oneCurrency)
-	maxAllowance.MaxSectorAccessPrice = types.SiacoinPrecision.Add(oneCurrency)
+	maxAllowance.MaxDownloadBandwidthPrice = types.ScPrimecoinPrecision.Div64(modules.StreamDownloadSize).Add(oneCurrency)
+	maxAllowance.MaxSectorAccessPrice = types.ScPrimecoinPrecision.Add(oneCurrency)
 	maxAllowance.MaxStoragePrice = oneCurrency
 	maxAllowance.MaxUploadBandwidthPrice = oneCurrency
 
@@ -78,7 +78,7 @@ func TestCheckFetchBackupsGouging(t *testing.T) {
 
 	// Should fail if the MaxRPCPrice is dropped.
 	failAllowance := maxAllowance
-	failAllowance.MaxRPCPrice = types.SiacoinPrecision.Sub(oneCurrency)
+	failAllowance.MaxRPCPrice = types.ScPrimecoinPrecision.Sub(oneCurrency)
 	err = checkFetchBackupsGouging(failAllowance, minHostSettings)
 	if err == nil {
 		t.Fatal("expecting price gouging check to fail")
@@ -86,7 +86,7 @@ func TestCheckFetchBackupsGouging(t *testing.T) {
 
 	// Should fail if the MaxDownloadBandwidthPrice is dropped.
 	failAllowance = maxAllowance
-	failAllowance.MaxDownloadBandwidthPrice = types.SiacoinPrecision.Div64(modules.StreamDownloadSize).Sub(oneCurrency)
+	failAllowance.MaxDownloadBandwidthPrice = types.ScPrimecoinPrecision.Div64(modules.StreamDownloadSize).Sub(oneCurrency)
 	err = checkFetchBackupsGouging(failAllowance, minHostSettings)
 	if err == nil {
 		t.Fatal("expecting price gouging check to fail")
@@ -94,7 +94,7 @@ func TestCheckFetchBackupsGouging(t *testing.T) {
 
 	// Should fail if the MaxSectorAccessPrice is dropped.
 	failAllowance = maxAllowance
-	failAllowance.MaxSectorAccessPrice = types.SiacoinPrecision.Sub(oneCurrency)
+	failAllowance.MaxSectorAccessPrice = types.ScPrimecoinPrecision.Sub(oneCurrency)
 	err = checkFetchBackupsGouging(failAllowance, minHostSettings)
 	if err == nil {
 		t.Fatal("expecting price gouging check to fail")

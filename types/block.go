@@ -55,19 +55,17 @@ type (
 // CalculateCoinbase calculates the coinbase for a given height. The coinbase
 // equation is:
 //
-//     coinbase := max(InitialCoinbase - height, MinimumCoinbase) * SiacoinPrecision
+//     old coinbase := max(InitialCoinbase - height, MinimumCoinbase) * ScPrimecoinPrecision uint64
+//     new coinbase := static @ 30 SCC
 func CalculateCoinbase(height BlockHeight) Currency {
-	base := InitialCoinbase - uint64(height)
-	if uint64(height) > InitialCoinbase || base < MinimumCoinbase {
-		base = MinimumCoinbase
-	}
-	return NewCurrency64(base).Mul(SiacoinPrecision)
+	base := uint64(30) //30e3 SC = 30 SCC
+	return NewCurrency64(base).Mul(ScPrimecoinPrecision)
 }
 
 // CalculateNumSiacoins calculates the number of siacoins in circulation at a
 // given height.
 func CalculateNumSiacoins(height BlockHeight) Currency {
-	airdropCoins := AirdropCommunityValue.Add(AirdropPoolValue).Add(AirdropNebulousLabsValue).Add(AirdropSiaPrimeValue)
+	airdropCoins := AirdropCommunityValue.Add(AirdropPoolValue).Add(AirdropSiaPrimeValue).Add(AirdropSiaCloudValue)
 
 	deflationBlocks := BlockHeight(InitialCoinbase - MinimumCoinbase)
 	avgDeflationSiacoins := CalculateCoinbase(0).Add(CalculateCoinbase(height)).Div(NewCurrency64(2))

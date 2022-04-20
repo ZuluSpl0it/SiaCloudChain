@@ -70,7 +70,7 @@ func requiredFeesToExtendTpoolAtSize(size int) types.Currency {
 	// Calculate the fee required to bump out the size of the transaction pool.
 	ratioToTarget := float64(size) / TransactionPoolSizeTarget
 	feeFactor := math.Pow(ratioToTarget, TransactionPoolExponentiation)
-	return types.SiacoinPrecision.MulFloat(feeFactor).Div64(1000) // Divide by 1000 to get SC / kb
+	return types.ScPrimecoinPrecision.MulFloat(feeFactor).Div64(1000) // Divide by 1000 to get SC / kb
 }
 
 // requiredFeesToExtendTpool returns the amount of fees required to extend the

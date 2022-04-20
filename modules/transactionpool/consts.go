@@ -73,7 +73,7 @@ var (
 var (
 	// minEstimation defines a sane minimum fee per byte for transactions.  This
 	// will typically be only suggested as a fee in the absence of congestion.
-	minEstimation = types.SiacoinPrecision.Div64(100).Div64(1e3)
+	minEstimation = types.ScPrimecoinPrecision.Div64(100).Div64(1e3)
 )
 
 // Variables related to propagating transactions through the network.

@@ -71,8 +71,8 @@ func (ht *hostTester) newTesterStorageObligation() (storageObligation, error) {
 		builder.Drop()
 		return storageObligation{}, errors.AddContext(err, "Can not get host unlockhash")
 	}
-	payout := types.SiacoinPrecision.Mul64(10e3)
-	collateral := types.SiacoinPrecision.Mul64(10)
+	payout := types.ScPrimecoinPrecision.Mul64(10e3)
+	collateral := types.ScPrimecoinPrecision.Mul64(10)
 	err = builder.FundSiacoinsFixedAddress(payout, uc, uc)
 	if err != nil {
 		builder.Drop()
@@ -264,7 +264,7 @@ func TestSingleSectorStorageObligationStack(t *testing.T) {
 	// for the file contract.
 	sectorRoot, sectorData := randSector()
 	so.SectorRoots = []crypto.Hash{sectorRoot}
-	sectorCost := types.SiacoinPrecision.Mul64(550)
+	sectorCost := types.ScPrimecoinPrecision.Mul64(550)
 	so.PotentialStorageRevenue = so.PotentialStorageRevenue.Add(sectorCost)
 	ht.host.mu.Lock()
 	ht.host.financialMetrics.PotentialStorageRevenue = ht.host.financialMetrics.PotentialStorageRevenue.Add(sectorCost)
@@ -483,7 +483,7 @@ func TestMultiSectorStorageObligationStack(t *testing.T) {
 	// for the file contract.
 	sectorRoot, sectorData := randSector()
 	so.SectorRoots = []crypto.Hash{sectorRoot}
-	sectorCost := types.SiacoinPrecision.Mul64(550)
+	sectorCost := types.ScPrimecoinPrecision.Mul64(550)
 	so.PotentialStorageRevenue = so.PotentialStorageRevenue.Add(sectorCost)
 	ht.host.mu.Lock()
 	ht.host.financialMetrics.PotentialStorageRevenue = ht.host.financialMetrics.PotentialStorageRevenue.Add(sectorCost)
@@ -531,7 +531,7 @@ func TestMultiSectorStorageObligationStack(t *testing.T) {
 	// multiple sectors.
 	sectorRoot2, sectorData2 := randSector()
 	so.SectorRoots = []crypto.Hash{sectorRoot, sectorRoot2}
-	sectorCost2 := types.SiacoinPrecision.Mul64(650)
+	sectorCost2 := types.ScPrimecoinPrecision.Mul64(650)
 	so.PotentialStorageRevenue = so.PotentialStorageRevenue.Add(sectorCost2)
 	ht.host.mu.Lock()
 	ht.host.financialMetrics.PotentialStorageRevenue = ht.host.financialMetrics.PotentialStorageRevenue.Add(sectorCost2)
@@ -720,7 +720,7 @@ func TestAutoRevisionSubmission(t *testing.T) {
 	// for the file contract.
 	sectorRoot, sectorData := randSector()
 	so.SectorRoots = []crypto.Hash{sectorRoot}
-	sectorCost := types.SiacoinPrecision.Mul64(550)
+	sectorCost := types.ScPrimecoinPrecision.Mul64(550)
 	so.PotentialStorageRevenue = so.PotentialStorageRevenue.Add(sectorCost)
 	ht.host.financialMetrics.PotentialStorageRevenue = ht.host.financialMetrics.PotentialStorageRevenue.Add(sectorCost)
 	validPayouts, missedPayouts := so.payouts()

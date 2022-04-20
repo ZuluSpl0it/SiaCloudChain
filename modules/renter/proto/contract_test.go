@@ -449,11 +449,11 @@ func TestContractRecordAndCommitPaymentIntent(t *testing.T) {
 			FileContractRevisions: []types.FileContractRevision{{
 				NewRevisionNumber: 1,
 				NewValidProofOutputs: []types.SiacoinOutput{
-					{Value: types.SiacoinPrecision},
+					{Value: types.ScPrimecoinPrecision},
 					{Value: types.ZeroCurrency},
 				},
 				NewMissedProofOutputs: []types.SiacoinOutput{
-					{Value: types.SiacoinPrecision},
+					{Value: types.ScPrimecoinPrecision},
 					{Value: types.ZeroCurrency},
 					{Value: types.ZeroCurrency},
 				},
@@ -638,11 +638,11 @@ func TestContractRecordCommitDownloadIntent(t *testing.T) {
 			FileContractRevisions: []types.FileContractRevision{{
 				NewRevisionNumber: 1,
 				NewValidProofOutputs: []types.SiacoinOutput{
-					{Value: types.SiacoinPrecision},
+					{Value: types.ScPrimecoinPrecision},
 					{Value: types.ZeroCurrency},
 				},
 				NewMissedProofOutputs: []types.SiacoinOutput{
-					{Value: types.SiacoinPrecision},
+					{Value: types.ScPrimecoinPrecision},
 					{Value: types.ZeroCurrency},
 					{Value: types.ZeroCurrency},
 				},
@@ -753,12 +753,12 @@ func TestContractRecordCommitAppendIntent(t *testing.T) {
 			FileContractRevisions: []types.FileContractRevision{{
 				NewRevisionNumber: 1,
 				NewValidProofOutputs: []types.SiacoinOutput{
-					{Value: types.SiacoinPrecision},
-					{Value: types.SiacoinPrecision},
+					{Value: types.ScPrimecoinPrecision},
+					{Value: types.ScPrimecoinPrecision},
 				},
 				NewMissedProofOutputs: []types.SiacoinOutput{
-					{Value: types.SiacoinPrecision},
-					{Value: types.SiacoinPrecision},
+					{Value: types.ScPrimecoinPrecision},
+					{Value: types.ScPrimecoinPrecision},
 					{Value: types.ZeroCurrency},
 				},
 				UnlockConditions: types.UnlockConditions{
@@ -871,11 +871,11 @@ func TestContractRecordCommitRenewAndClearIntent(t *testing.T) {
 			FileContractRevisions: []types.FileContractRevision{{
 				NewRevisionNumber: 1,
 				NewValidProofOutputs: []types.SiacoinOutput{
-					{Value: types.SiacoinPrecision},
+					{Value: types.ScPrimecoinPrecision},
 					{Value: types.ZeroCurrency},
 				},
 				NewMissedProofOutputs: []types.SiacoinOutput{
-					{Value: types.SiacoinPrecision},
+					{Value: types.ScPrimecoinPrecision},
 					{Value: types.ZeroCurrency},
 					{Value: types.ZeroCurrency},
 				},

@@ -40,14 +40,14 @@ func TestVerifyNewContract(t *testing.T) {
 		log:       ht.host.log,
 		publicKey: types.Ed25519PublicKey(hostPK),
 		settings: modules.HostInternalSettings{
-			CollateralBudget: types.SiacoinPrecision,
+			CollateralBudget: types.ScPrimecoinPrecision,
 		},
 		staticAlerter: modules.NewAlerter("test"),
 		tpool:         ht.tpool,
 	}
 	curr := []types.Transaction{
 		{
-			MinerFees: []types.Currency{types.SiacoinPrecision},
+			MinerFees: []types.Currency{types.ScPrimecoinPrecision},
 			FileContracts: []types.FileContract{
 				{
 					Payout: types.NewCurrency64(10),
@@ -75,9 +75,9 @@ func TestVerifyNewContract(t *testing.T) {
 	}
 	newSettings := func() modules.HostExternalSettings {
 		return modules.HostExternalSettings{
-			Collateral:    types.SiacoinPrecision,
+			Collateral:    types.ScPrimecoinPrecision,
 			ContractPrice: types.NewCurrency64(1),
-			MaxCollateral: types.SiacoinPrecision,
+			MaxCollateral: types.ScPrimecoinPrecision,
 			MaxDuration:   1000,
 			WindowSize:    10,
 		}

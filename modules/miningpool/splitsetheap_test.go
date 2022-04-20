@@ -31,7 +31,7 @@ func TestMapHeapSimple(t *testing.T) {
 	for _, i := range randSlice {
 		e1 := &mapElement{
 			set: &splitSet{
-				averageFee:   types.SiacoinPrecision.Mul64(uint64(i)),
+				averageFee:   types.ScPrimecoinPrecision.Mul64(uint64(i)),
 				size:         uint64(10 * i),
 				transactions: make([]types.Transaction, 0),
 			},
@@ -41,7 +41,7 @@ func TestMapHeapSimple(t *testing.T) {
 		}
 		e2 := &mapElement{
 			set: &splitSet{
-				averageFee:   types.SiacoinPrecision.Mul64(uint64(i)),
+				averageFee:   types.ScPrimecoinPrecision.Mul64(uint64(i)),
 				size:         uint64(10 * i),
 				transactions: make([]types.Transaction, 0),
 			},
@@ -63,10 +63,10 @@ func TestMapHeapSimple(t *testing.T) {
 		if int(minPop.id) != i {
 			t.Error("Unexpected splitSetID in result from min-heap pop.")
 		}
-		if maxPop.set.averageFee.Cmp(types.SiacoinPrecision.Mul64(uint64(999-i))) != 0 {
+		if maxPop.set.averageFee.Cmp(types.ScPrimecoinPrecision.Mul64(uint64(999-i))) != 0 {
 			t.Error("Unexpected currency value in result from max-heap pop.")
 		}
-		if minPop.set.averageFee.Cmp(types.SiacoinPrecision.Mul64(uint64(i))) != 0 {
+		if minPop.set.averageFee.Cmp(types.ScPrimecoinPrecision.Mul64(uint64(i))) != 0 {
 			t.Error("Unexpected currency value in result from min-heap pop.")
 		}
 	}
@@ -97,7 +97,7 @@ func TestMapHeapSize(t *testing.T) {
 	for _, i := range randSlice {
 		e1 := &mapElement{
 			set: &splitSet{
-				averageFee:   types.SiacoinPrecision.Mul64(uint64(i)),
+				averageFee:   types.ScPrimecoinPrecision.Mul64(uint64(i)),
 				size:         uint64(100 * i),
 				transactions: make([]types.Transaction, 0),
 			},
@@ -107,7 +107,7 @@ func TestMapHeapSize(t *testing.T) {
 		}
 		e2 := &mapElement{
 			set: &splitSet{
-				averageFee:   types.SiacoinPrecision.Mul64(uint64(i)),
+				averageFee:   types.ScPrimecoinPrecision.Mul64(uint64(i)),
 				size:         uint64(100 * i),
 				transactions: make([]types.Transaction, 0),
 			},
@@ -162,7 +162,7 @@ func TestMapHeapRemoveBySetID(t *testing.T) {
 	for i := 0; i < 5000; i++ {
 		e1 := &mapElement{
 			set: &splitSet{
-				averageFee:   types.SiacoinPrecision.Mul64(uint64(i)),
+				averageFee:   types.ScPrimecoinPrecision.Mul64(uint64(i)),
 				size:         uint64(10 * i),
 				transactions: make([]types.Transaction, 0),
 			},
@@ -172,7 +172,7 @@ func TestMapHeapRemoveBySetID(t *testing.T) {
 		}
 		e2 := &mapElement{
 			set: &splitSet{
-				averageFee:   types.SiacoinPrecision.Mul64(uint64(i)),
+				averageFee:   types.ScPrimecoinPrecision.Mul64(uint64(i)),
 				size:         uint64(10 * i),
 				transactions: make([]types.Transaction, 0),
 			},
@@ -298,7 +298,7 @@ func TestMapHeapPeek(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		e1 := &mapElement{
 			set: &splitSet{
-				averageFee:   types.SiacoinPrecision.Mul64(uint64(i)),
+				averageFee:   types.ScPrimecoinPrecision.Mul64(uint64(i)),
 				size:         uint64(10 * i),
 				transactions: make([]types.Transaction, 0),
 			},
@@ -308,7 +308,7 @@ func TestMapHeapPeek(t *testing.T) {
 		}
 		e2 := &mapElement{
 			set: &splitSet{
-				averageFee:   types.SiacoinPrecision.Mul64(uint64(i)),
+				averageFee:   types.ScPrimecoinPrecision.Mul64(uint64(i)),
 				size:         uint64(10 * i),
 				transactions: make([]types.Transaction, 0),
 			},

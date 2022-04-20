@@ -50,7 +50,7 @@ func TestMinimizeTransactionSet(t *testing.T) {
 	// Create source outputs for transaction graphs.
 	var sources []types.SiacoinOutputID
 	numSources := 2
-	sourceSize := types.SiacoinPrecision.Mul64(1e3)
+	sourceSize := types.ScPrimecoinPrecision.Mul64(1e3)
 	var outputs []types.SiacoinOutput
 	for i := 0; i < numSources; i++ {
 		outputs = append(outputs, types.SiacoinOutput{
@@ -156,9 +156,9 @@ func TestMinimizeTransactionSet(t *testing.T) {
 	// Add txn1, which consumes src1 and produces out1
 	txn1Outputs, err := graph1.AddTransaction(typesutil.SimpleTransaction{
 		SiacoinInputs:  []int{source1Index},
-		SiacoinOutputs: []types.Currency{types.SiacoinPrecision.Mul64(999)},
+		SiacoinOutputs: []types.Currency{types.ScPrimecoinPrecision.Mul64(999)},
 
-		MinerFees: []types.Currency{types.SiacoinPrecision},
+		MinerFees: []types.Currency{types.ScPrimecoinPrecision},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -167,11 +167,11 @@ func TestMinimizeTransactionSet(t *testing.T) {
 	txn2Outputs, err := graph1.AddTransaction(typesutil.SimpleTransaction{
 		SiacoinInputs: []int{source2Index},
 		SiacoinOutputs: []types.Currency{
-			types.SiacoinPrecision.Mul64(499),
-			types.SiacoinPrecision.Mul64(500),
+			types.ScPrimecoinPrecision.Mul64(499),
+			types.ScPrimecoinPrecision.Mul64(500),
 		},
 
-		MinerFees: []types.Currency{types.SiacoinPrecision},
+		MinerFees: []types.Currency{types.ScPrimecoinPrecision},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -183,11 +183,11 @@ func TestMinimizeTransactionSet(t *testing.T) {
 			txn2Outputs[0],
 		},
 		SiacoinOutputs: []types.Currency{
-			types.SiacoinPrecision.Mul64(998),
-			types.SiacoinPrecision.Mul64(499),
+			types.ScPrimecoinPrecision.Mul64(998),
+			types.ScPrimecoinPrecision.Mul64(499),
 		},
 
-		MinerFees: []types.Currency{types.SiacoinPrecision},
+		MinerFees: []types.Currency{types.ScPrimecoinPrecision},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -198,10 +198,10 @@ func TestMinimizeTransactionSet(t *testing.T) {
 			txn2Outputs[1],
 		},
 		SiacoinOutputs: []types.Currency{
-			types.SiacoinPrecision.Mul64(499),
+			types.ScPrimecoinPrecision.Mul64(499),
 		},
 
-		MinerFees: []types.Currency{types.SiacoinPrecision},
+		MinerFees: []types.Currency{types.ScPrimecoinPrecision},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -220,9 +220,9 @@ func TestMinimizeTransactionSet(t *testing.T) {
 	// that there is a proper conflict.
 	_, err = graph2.AddTransaction(typesutil.SimpleTransaction{
 		SiacoinInputs:  []int{graph2Source},
-		SiacoinOutputs: []types.Currency{types.SiacoinPrecision.Mul64(998)},
+		SiacoinOutputs: []types.Currency{types.ScPrimecoinPrecision.Mul64(998)},
 
-		MinerFees: []types.Currency{types.SiacoinPrecision.Mul64(2)},
+		MinerFees: []types.Currency{types.ScPrimecoinPrecision.Mul64(2)},
 	})
 	if err != nil {
 		t.Fatal(err)

@@ -54,7 +54,7 @@ func TestVerifyPaymentRevision(t *testing.T) {
 	// make sure verification fails if the amount of money moved to the void
 	// doesn't match the amount of money moved to the host.
 	badPayment := deepCopy(payment)
-	badPayment.SetMissedVoidPayout(types.SiacoinPrecision)
+	badPayment.SetMissedVoidPayout(types.ScPrimecoinPrecision)
 	err = verifyPaymentRevision(curr, badPayment, height, amount)
 	if !errors.Contains(err, ErrLowVoidOutput) {
 		t.Fatalf("expected %v but got %v", ErrLowVoidOutput, err)

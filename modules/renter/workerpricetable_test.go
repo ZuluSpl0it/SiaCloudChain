@@ -16,7 +16,7 @@ func TestUpdatePriceTableGouging(t *testing.T) {
 
 	// allowance contains only the fields necessary to test the price gouging
 	allowance := modules.Allowance{
-		Funds:  types.SiacoinPrecision,
+		Funds:  types.ScPrimecoinPrecision,
 		Period: types.BlockHeight(6),
 	}
 

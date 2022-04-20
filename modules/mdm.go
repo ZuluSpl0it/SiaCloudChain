@@ -198,7 +198,7 @@ func MDMAppendCost(pt *RPCPriceTable, duration types.BlockHeight) (types.Currenc
 
 // MDMCopyCost is the cost of executing a 'Copy' instruction.
 func MDMCopyCost(pt RPCPriceTable, contractSize uint64) types.Currency {
-	return types.SiacoinPrecision // TODO: figure out good cost
+	return types.ScPrimecoinPrecision // TODO: figure out good cost
 }
 
 // MDMDropSectorsCost is the cost of executing a 'DropSectors' instruction for a
@@ -246,12 +246,12 @@ func MDMWriteCost(pt *RPCPriceTable, writeLength uint64) types.Currency {
 
 // MDMSwapCost is the cost of executing a 'Swap' instruction.
 func MDMSwapCost(pt *RPCPriceTable, contractSize uint64) types.Currency {
-	return types.SiacoinPrecision // TODO: figure out good cost
+	return types.ScPrimecoinPrecision // TODO: figure out good cost
 }
 
 // MDMTruncateCost is the cost of executing a 'Truncate' instruction.
 func MDMTruncateCost(pt *RPCPriceTable, contractSize uint64) types.Currency {
-	return types.SiacoinPrecision // TODO: figure out good cost
+	return types.ScPrimecoinPrecision // TODO: figure out good cost
 }
 
 // MDMAppendMemory returns the additional memory consumption of a 'Append'
