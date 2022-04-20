@@ -20,7 +20,7 @@ var maxScanKeys = func() uint64 {
 	case "dev":
 		return 1e6
 	case "standard":
-		return 100e6
+		return 60e6 //OSV was 100e6, 60e6 to save RAM
 	case "testing":
 		return 100e3
 	default:
