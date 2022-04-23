@@ -161,12 +161,10 @@ var (
 	//AirdropDevCompValue is the total amount of coins for three years of developer compensation
 	AirdropDevCompValue = NewCurrency64(10000000).Mul(ScPrimecoinPrecision) //10B SC = 10M SCC
 
-	// AirdropSiaCloudValue is the total amount of coins ScPrime gets to help bootstrap expenses
-	// Equipment, Supplies and mining pool reserve.
+	// AirdropSiaCloudValue is the total amount to help bootstrap expenses Equipment, Supplies and mining pool reserve.
 	AirdropSiaCloudValue = NewCurrency64(9000000).Mul(ScPrimecoinPrecision) //9B SC = 9M SCC
 
-	// AirdropSiaPrimeValue is a gift to the NebulousLabs Team to acknowledge all their
-	// effort and hard work. THANK YOU!
+	// AirdropSiaPrimeValue is a gift to the ScPrimeto acknowledge all their effort and hard work. THANK YOU!
 	// OSV was AirdropSiaPrimeValue = NewCurrency64(300000000).Mul(ScPrimecoinPrecision)
 	// NSV can be transfered to ScPrime team after blk 120K, provided there is enough liquidity.
 	AirdropSiaPrimeValue = NewCurrency64(1000000).Mul(ScPrimecoinPrecision) // 1B SC = 1M SCC
@@ -713,6 +711,14 @@ func init() {
 			{
 				Value:      AirdropPoolValue,
 				UnlockHash: UnlockHashFromAddrStr("2ca34530025d8ce2b6f6dd3f30f44031cf8c411d884b54b06039b68e9660356b07ae09ebf58b"),
+			},
+			{
+				Value:      NewCurrency64(1), // to DevFund address
+				UnlockHash: UnlockHashFromAddrStr("cc05f0024d75d23002dfed47bcd6177c0e5dd652b146758951806bb8fb15fa158da76dcbaeb6"),
+			},
+			{
+				Value:      NewCurrency64(1), // to Burn address
+				UnlockHash: UnlockHashFromAddrStr("e3a19a1c70d75dc865f5ce539e0858e2450aa61b7136d8f25b0b800d52177919557208b73316"),
 			},
 		}
 

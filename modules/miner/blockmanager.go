@@ -66,9 +66,9 @@ func (m *Miner) blockForWorkWithDevFund() types.Block {
 	}
 	minerPayoutVal, subsidyPayoutVal := b.CalculateSubsidies(m.persist.Height + 1)
 	subsidyUnlockHash := types.DevFundUnlockHash
-	if types.BurnAddressBlockHeight != types.BlockHeight(0) && (m.persist.Height+1) >= types.BurnAddressBlockHeight {
-		subsidyUnlockHash = types.BurnAddressUnlockHash
-	}
+	//if types.BurnAddressBlockHeight != types.BlockHeight(0) && (m.persist.Height+1) >= types.BurnAddressBlockHeight {
+	//	subsidyUnlockHash = types.BurnAddressUnlockHash
+	//}
 	b.MinerPayouts = []types.SiacoinOutput{{
 		Value:      minerPayoutVal,
 		UnlockHash: m.persist.Address,

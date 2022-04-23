@@ -90,9 +90,9 @@ func checkMinerPayoutsWithDevFund(b types.Block, height types.BlockHeight) bool 
 
 	// TODO Keep this or remove?
 	subsidyUnlockHash := types.DevFundUnlockHash
-	if types.BurnAddressBlockHeight != types.BlockHeight(0) && height >= types.BurnAddressBlockHeight {
-		subsidyUnlockHash = types.BurnAddressUnlockHash
-	}
+	//if types.BurnAddressBlockHeight != types.BlockHeight(0) && height >= types.BurnAddressBlockHeight {
+	//	subsidyUnlockHash = types.BurnAddressUnlockHash
+	//}
 	if bytes.Compare(devSubsidyPayout.UnlockHash[:], subsidyUnlockHash[:]) != 0 {
 		return false
 	}
