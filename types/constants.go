@@ -617,12 +617,12 @@ func init() {
 		// premine 100 blocks in a day. It was known to the developers at launch
 		// this this was at least one and perhaps two orders of magnitude too
 		// small.
-		RootTarget = Target{0, 0, 0, 0, 224} //OSV was 0, 0, 0, 0, 0, 0, 2
+		RootTarget = Target{0, 0, 0, 0, 0, 128} //OSV was 0, 0, 0, 0, 0, 0, 2
 
 		// When the difficulty is adjusted, it is adjusted by looking at the
 		// timestamp of the 1000th previous block. This minimizes the abilities
 		// of miners to attack the network using rogue timestamps.
-		TargetWindow = 1e3
+		TargetWindow = 500 //OSV was 1e3, new is 500
 
 		// The difficulty adjustment is clamped to 2.5x every 500 blocks. This
 		// corresponds to 6.25x every 2 weeks, which can be compared to

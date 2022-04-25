@@ -19,7 +19,7 @@ import (
 const (
 	// minNumOutbound is the minimum number of outbound peers required before ibd
 	// is confident we are synced.
-	minNumOutbound = 4
+	minNumOutbound = 3
 )
 
 var (
@@ -39,7 +39,7 @@ var (
 	// the consensus set in a single iteration during the initial blockchain
 	// download.
 	MaxCatchUpBlocks = build.Select(build.Var{
-		Standard: types.BlockHeight(10),
+		Standard: types.BlockHeight(25), // increased to 25 from 10
 		Dev:      types.BlockHeight(50),
 		Testing:  types.BlockHeight(3),
 	}).(types.BlockHeight)
@@ -57,21 +57,21 @@ var (
 
 	// relayHeaderTimeout is the timeout for the RelayHeader RPC.
 	relayHeaderTimeout = build.Select(build.Var{
-		Standard: 60 * time.Second,
+		Standard: 15 * time.Second, //Reduced to 15 from 60 to sync faster
 		Dev:      20 * time.Second,
 		Testing:  3 * time.Second,
 	}).(time.Duration)
 
 	// sendBlkTimeout is the timeout for the SendBlk RPC.
 	sendBlkTimeout = build.Select(build.Var{
-		Standard: 90 * time.Second,
+		Standard: 15 * time.Second, //Reduced to 15 from 90 60 to sync faster
 		Dev:      30 * time.Second,
 		Testing:  4 * time.Second,
 	}).(time.Duration)
 
 	// sendBlocksTimeout is the timeout for the SendBlocks RPC.
 	sendBlocksTimeout = build.Select(build.Var{
-		Standard: 180 * time.Second,
+		Standard: 15 * time.Second, //Reduced to 15 from 180 60 to sync faster
 		Dev:      40 * time.Second,
 		Testing:  5 * time.Second,
 	}).(time.Duration)

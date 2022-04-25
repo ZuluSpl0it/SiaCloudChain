@@ -67,13 +67,13 @@ func die(args ...interface{}) {
 func versionCmd(*cobra.Command, []string) {
 	switch build.Release {
 	case "dev":
-		fmt.Println("SiaCloud (MK04) Daemon v" + build.Version + "-dev")
+		fmt.Println("SiaCloud (MK05) Daemon v" + build.Version + "-dev")
 	case "standard":
-		fmt.Println("SiaCloud (MK04) Daemon v" + build.Version + " based on ScPrime")
+		fmt.Println("SiaCloud (MK05) Daemon v" + build.Version + " based on ScPrime")
 	case "testing":
-		fmt.Println("SiaCloud (MK04) Daemon v" + build.Version + "-testing")
+		fmt.Println("SiaCloud (MK05) Daemon v" + build.Version + "-testing")
 	default:
-		fmt.Println("SiaCloud (MK04) Daemon v" + build.Version + "-???")
+		fmt.Println("SiaCloud (MK05) Daemon v" + build.Version + "-???")
 	}
 }
 
@@ -157,8 +157,8 @@ func main() {
 	}
 	root := &cobra.Command{
 		Use:   os.Args[0],
-		Short: "SiaCloud (MK04) Daemon v" + build.Version + " based on ScPrime",
-		Long:  "SiaCloud (MK04) Daemon v" + build.Version + " based on ScPrime",
+		Short: "SiaCloud (MK05) Daemon v" + build.Version + " based on ScPrime",
+		Long:  "SiaCloud (MK05) Daemon v" + build.Version + " based on ScPrime",
 		Run:   startDaemonCmd,
 	}
 
