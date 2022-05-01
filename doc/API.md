@@ -14,19 +14,19 @@ in production.
 
 Notes:
 - Requests must set their User-Agent string to contain the substring "ScPrime-Agent".
-- By default, spd listens on "localhost:4280". This can be changed using the
+- By default, spd listens on "localhost:9510". This can be changed using the
   `--api-addr` flag when running spd.
 - **Do not bind or expose the API to a non-loopback address unless you are
   aware of the possible dangers.**
 
 Example GET curl call:
 ```
-curl -A "ScPrime-Agent" "localhost:4280/wallet/transactions?startheight=1&endheight=250"
+curl -A "ScPrime-Agent" "localhost:9510/wallet/transactions?startheight=1&endheight=250"
 ```
 
 Example POST curl call:
 ```
-curl -A "ScPrime-Agent" --data "amount=123&destination=abcd" "localhost:4280/wallet/siacoins"
+curl -A "ScPrime-Agent" --data "amount=123&destination=abcd" "localhost:9510/wallet/siacoins"
 ```
 
 Standard responses
@@ -380,7 +380,7 @@ fetches status information about the host.
     "maxdownloadbatchsize": 17825792, // bytes
     "maxduration":          25920,    // blocks
     "maxrevisebatchsize":   17825792, // bytes
-    "netaddress":           "123.456.789.0:4282",
+    "netaddress":           "123.456.789.0:9514",
     "remainingstorage":     35000000000, // bytes
     "sectorsize":           4194304,     // bytes
     "totalstorage":         35000000000, // bytes
@@ -423,7 +423,7 @@ fetches status information about the host.
     "maxdownloadbatchsize": 17825792, // bytes
     "maxduration":          25920,    // blocks
     "maxrevisebatchsize":   17825792, // bytes
-    "netaddress":           "123.456.789.0:4282",
+    "netaddress":           "123.456.789.0:9514",
     "windowsize":           144, // blocks
 
     "collateral":       "57870370370",                     // hastings / byte / block
@@ -696,7 +696,7 @@ numhosts // Optional
       "maxdownloadbatchsize": 17825792, // bytes
       "maxduration":          25920,    // blocks
       "maxrevisebatchsize":   17825792, // bytes
-      "netaddress":           "123.456.789.2:4282",
+      "netaddress":           "123.456.789.2:9514",
       "remainingstorage":     35000000000, // bytes
       "sectorsize":           4194304,     // bytes
       "totalstorage":         35000000000, // bytes
@@ -726,7 +726,7 @@ any particular order, and the order may change in subsequent calls.
       "maxdownloadbatchsize": 17825792, // bytes
       "maxduration":          25920,    // blocks
       "maxrevisebatchsize":   17825792, // bytes
-      "netaddress":           "123.456.789.0:4282",
+      "netaddress":           "123.456.789.0:9514",
       "remainingstorage":     35000000000, // bytes
       "sectorsize":           4194304,     // bytes
       "totalstorage":         35000000000, // bytes
@@ -763,7 +763,7 @@ overall.
     "maxdownloadbatchsize": 17825792, // bytes
     "maxduration":          25920,    // blocks
     "maxrevisebatchsize":   17825792, // bytes
-    "netaddress":           "123.456.789.0:4282",
+    "netaddress":           "123.456.789.0:9514",
     "remainingstorage":     35000000000, // bytes
     "sectorsize":           4194304,     // bytes
     "totalstorage":         35000000000, // bytes

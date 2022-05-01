@@ -289,8 +289,8 @@ func main() {
 func initCmds() *cobra.Command {
 	root := &cobra.Command{
 		Use:   os.Args[0],
-		Short: "SiaCloud Client (MK05) v" + build.Version + " based on ScPrime",
-		Long:  "SiaCloud Client (MK05) v" + build.Version + " based on ScPrime",
+		Short: "SiaCloud Client (MK06-UI) v" + build.Version + " based on ScPrime",
+		Long:  "SiaCloud Client (MK06-UI) v" + build.Version + " based on ScPrime",
 		Run:   wrap(statuscmd),
 	}
 
@@ -429,7 +429,7 @@ func initCmds() *cobra.Command {
 // initClient initializes client cmd flags and default values
 func initClient(root *cobra.Command, verbose *bool, client *client.Client, dataDir *string) {
 	root.Flags().BoolVarP(verbose, "verbose", "v", false, "Display additional spc information")
-	root.PersistentFlags().StringVarP(&client.Address, "addr", "a", "localhost:4280", "which host/port to communicate with (i.e. the host/port spd is listening on)")
+	root.PersistentFlags().StringVarP(&client.Address, "addr", "a", "localhost:9510", "which host/port to communicate with (i.e. the host/port spd is listening on)")
 	root.PersistentFlags().StringVarP(&client.Password, "apipassword", "", "", "the password for the API's http authentication")
 	root.PersistentFlags().StringVarP(dataDir, "scprime-directory", "d", "", "location of the scprime daemon metadata directory")
 	root.PersistentFlags().StringVarP(&client.UserAgent, "useragent", "", "ScPrime-Agent", "the useragent used by spc to connect to the daemon's API")

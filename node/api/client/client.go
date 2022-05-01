@@ -77,7 +77,7 @@ func DefaultOptions() (Options, error) {
 		return Options{}, errors.AddContext(err, "could not locate api password")
 	}
 	return Options{
-		Address:   "localhost:4280",
+		Address:   "localhost:9510",
 		Password:  pw,
 		UserAgent: "ScPrime-Agent",
 	}, nil

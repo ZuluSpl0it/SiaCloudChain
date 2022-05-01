@@ -38,10 +38,10 @@ func TestAddNode(t *testing.T) {
 	if err := g.addNode("foo"); err == nil {
 		t.Error("addNode added unroutable address")
 	}
-	if err := g.addNode("foo:4281"); err == nil {
+	if err := g.addNode("foo:9511"); err == nil {
 		t.Error("addNode added a non-IP address")
 	}
-	if err := g.addNode("[::]:4281"); err == nil {
+	if err := g.addNode("[::]:9511"); err == nil {
 		t.Error("addNode added unspecified address")
 	}
 	if err := g.addNode(g.myAddr); err != errOurAddress {

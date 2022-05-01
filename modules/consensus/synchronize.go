@@ -57,21 +57,21 @@ var (
 
 	// relayHeaderTimeout is the timeout for the RelayHeader RPC.
 	relayHeaderTimeout = build.Select(build.Var{
-		Standard: 15 * time.Second, //Reduced to 15 from 60 to sync faster
+		Standard: 30 * time.Second, //Reduced to 30 from 60 to sync faster
 		Dev:      20 * time.Second,
 		Testing:  3 * time.Second,
 	}).(time.Duration)
 
 	// sendBlkTimeout is the timeout for the SendBlk RPC.
 	sendBlkTimeout = build.Select(build.Var{
-		Standard: 15 * time.Second, //Reduced to 15 from 90 60 to sync faster
+		Standard: 30 * time.Second, //Reduced to 30 from 90 60 to sync faster
 		Dev:      30 * time.Second,
 		Testing:  4 * time.Second,
 	}).(time.Duration)
 
 	// sendBlocksTimeout is the timeout for the SendBlocks RPC.
 	sendBlocksTimeout = build.Select(build.Var{
-		Standard: 15 * time.Second, //Reduced to 15 from 180 60 to sync faster
+		Standard: 120 * time.Second, //Reduced to 90 from 180 to sync faster
 		Dev:      40 * time.Second,
 		Testing:  5 * time.Second,
 	}).(time.Duration)

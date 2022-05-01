@@ -56,7 +56,7 @@ Usage
 -----
 This release comes with 2 binaries, `spd` and `spc`. `spd` is a background
 service, or "daemon," that runs the ScPrime protocol and exposes an HTTP API on
-port 4280. `spc` is a command-line client that can be used to interact with
+port 9510. `spc` is a command-line client that can be used to interact with
 `spd` in a user-friendly way. There is also a graphical client, [ScPrime-UI](https://gitlab.com/scpcorp/ScPrime-UI),
 which is a way of using ScPrime for wallet users. For interested 
 developers, the `spd` API is documented [here](doc/API.md).

@@ -10,8 +10,8 @@ func TestUnitProcessNetAddr(t *testing.T) {
 		inputs          []string
 		expectedOutputs []string
 	}{
-		inputs:          []string{"4280", ":4280", "localhost:4280", "test.com:4280", "192.168.14.92:4280"},
-		expectedOutputs: []string{":4280", ":4280", "localhost:4280", "test.com:4280", "192.168.14.92:4280"},
+		inputs:          []string{"9510", ":9510", "localhost:9510", "test.com:9510", "192.168.14.92:9510"},
+		expectedOutputs: []string{":9510", ":9510", "localhost:9510", "test.com:9510", "192.168.14.92:9510"},
 	}
 	for i, input := range testVals.inputs {
 		output := processNetAddr(input)
@@ -113,12 +113,12 @@ func TestUnitProcessConfig(t *testing.T) {
 		expectedOutputs [][]string
 	}{
 		inputs: [][]string{
-			{"localhost:4280", "localhost:4281", "localhost:4282", "cghmrtwe"},
-			{"localhost:4280", "localhost:4281", "localhost:4282", "CGHMRTWE"},
+			{"localhost:9510", "localhost:9511", "localhost:9514", "cghmrtwe"},
+			{"localhost:9510", "localhost:9511", "localhost:9514", "CGHMRTWE"},
 		},
 		expectedOutputs: [][]string{
-			{"localhost:4280", "localhost:4281", "localhost:4282", "cghmrtwe"},
-			{"localhost:4280", "localhost:4281", "localhost:4282", "cghmrtwe"},
+			{"localhost:9510", "localhost:9511", "localhost:9514", "cghmrtwe"},
+			{"localhost:9510", "localhost:9511", "localhost:9514", "cghmrtwe"},
 		},
 	}
 	var config Config
@@ -187,7 +187,7 @@ func TestLoadAPIPassword(t *testing.T) {
 func TestVerifyAPISecurity(t *testing.T) {
 	// Check that the loopback address is accepted when security is enabled.
 	var securityOnLoopback Config
-	securityOnLoopback.Spd.APIaddr = "127.0.0.1:4280"
+	securityOnLoopback.Spd.APIaddr = "127.0.0.1:9510"
 	err := verifyAPISecurity(securityOnLoopback)
 	if err != nil {
 		t.Error("loopback + securityOn was rejected")
@@ -195,7 +195,7 @@ func TestVerifyAPISecurity(t *testing.T) {
 
 	// Check that the blank address is rejected when security is enabled.
 	var securityOnBlank Config
-	securityOnBlank.Spd.APIaddr = ":4280"
+	securityOnBlank.Spd.APIaddr = ":9510"
 	err = verifyAPISecurity(securityOnBlank)
 	if err == nil {
 		t.Error("blank + securityOn was accepted")
@@ -203,7 +203,7 @@ func TestVerifyAPISecurity(t *testing.T) {
 
 	// Check that a public hostname is rejected when security is enabled.
 	var securityOnPublic Config
-	securityOnPublic.Spd.APIaddr = "scpri.me:4280"
+	securityOnPublic.Spd.APIaddr = "scpri.me:9510"
 	err = verifyAPISecurity(securityOnPublic)
 	if err == nil {
 		t.Error("public + securityOn was accepted")
@@ -212,7 +212,7 @@ func TestVerifyAPISecurity(t *testing.T) {
 	// Check that a public hostname is rejected when security is disabled and
 	// there is no api password.
 	var securityOffPublic Config
-	securityOffPublic.Spd.APIaddr = "scpri.me:4280"
+	securityOffPublic.Spd.APIaddr = "scpri.me:9510"
 	securityOffPublic.Spd.AllowAPIBind = true
 	err = verifyAPISecurity(securityOffPublic)
 	if err == nil {
@@ -222,7 +222,7 @@ func TestVerifyAPISecurity(t *testing.T) {
 	// Check that a public hostname is accepted when security is disabled and
 	// there is an api password.
 	var securityOffPublicAuthenticated Config
-	securityOffPublicAuthenticated.Spd.APIaddr = "scpri.me:4280"
+	securityOffPublicAuthenticated.Spd.APIaddr = "scpri.me:9510"
 	securityOffPublicAuthenticated.Spd.AllowAPIBind = true
 	securityOffPublicAuthenticated.Spd.AuthenticateAPI = true
 	err = verifyAPISecurity(securityOffPublicAuthenticated)

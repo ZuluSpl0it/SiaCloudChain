@@ -117,7 +117,7 @@ func alertscmd() {
 
 // version prints the version of spc and spd.
 func versioncmd() {
-	fmt.Println("SiaCloud Client (MK05) - based on ScPrime Client")
+	fmt.Println("SiaCloud Client (MK06-UI) - based on ScPrime Client")
 	if build.ReleaseTag == "" {
 		fmt.Println("\tVersion " + build.Version)
 	} else {
@@ -132,7 +132,7 @@ func versioncmd() {
 		fmt.Println("Could not get daemon version:", err)
 		return
 	}
-	fmt.Println("SiaCloud Daemon (MK05) - based on ScPrime Daemon")
+	fmt.Println("SiaCloud Daemon (MK06-UI) - based on ScPrime Daemon")
 	fmt.Println("\tVersion " + dvg.Version)
 	if build.GitRevision != "" {
 		fmt.Println("\tGit Revision " + dvg.GitRevision)

@@ -8,6 +8,7 @@ binDir="$2"
 
 # Directory of the ScPrime-UI Repo.
 uiDir="$3"
+
 if [ -z "$version" ] || [ -z "$binDir" ] || [ -z "$uiDir" ]; then
   echo "Usage: $0 VERSION BIN_DIRECTORY UI_DIRECTORY"
   exit 1
@@ -24,14 +25,14 @@ if [ "$SIA_SILENT_RELEASE" != "true" ]; then
 		exit 1
 	fi
 fi
-echo "Building ScPrime-UI...";
+echo "Building SiaCloud-UI...";
 
 # Get the absolute paths to avoid funny business with relative paths.
 uiDir=$(realpath "${uiDir}")
 binDir=$(realpath "${binDir}")
 
-# Remove previously built UI binaries.
-rm -r "${uiDir}"/release/
+# Remove previously built UI binaries, if the release folder exists
+	rm -r "${uiDir}"/release/ || true;
 
 cd "${uiDir}"
 
@@ -47,10 +48,11 @@ cp "${binDir}"/ScPrime-"${version}"-windows-amd64/spc.exe bin/win/
 cp "${binDir}"/ScPrime-"${version}"-windows-amd64/spd.exe bin/win/
 
 # Build yarn deps.
-yarn
+#yarn
+yarn --ignore-engines
 
 # Build each of the UI binaries.
-yarn package-linux
+yarn package-linux 
 yarn package-win
 yarn package
 

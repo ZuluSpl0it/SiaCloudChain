@@ -61,7 +61,7 @@ func main() {
 	args := os.Args
 	var addr string
 	if len(args) == 1 {
-		addr = "localhost:4280"
+		addr = "localhost:9510"
 	} else if len(args) == 2 {
 		// Parse port.
 		num, err := strconv.Atoi(args[1])

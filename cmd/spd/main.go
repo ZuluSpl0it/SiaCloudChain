@@ -67,13 +67,13 @@ func die(args ...interface{}) {
 func versionCmd(*cobra.Command, []string) {
 	switch build.Release {
 	case "dev":
-		fmt.Println("SiaCloud (MK05) Daemon v" + build.Version + "-dev")
+		fmt.Println("SiaCloud (MK06-UI) Daemon v" + build.Version + "-dev")
 	case "standard":
-		fmt.Println("SiaCloud (MK05) Daemon v" + build.Version + " based on ScPrime")
+		fmt.Println("SiaCloud (MK06-UI) Daemon v" + build.Version + " based on ScPrime")
 	case "testing":
-		fmt.Println("SiaCloud (MK05) Daemon v" + build.Version + "-testing")
+		fmt.Println("SiaCloud (MK06-UI) Daemon v" + build.Version + "-testing")
 	default:
-		fmt.Println("SiaCloud (MK05) Daemon v" + build.Version + "-???")
+		fmt.Println("SiaCloud (MK06-UI) Daemon v" + build.Version + "-???")
 	}
 }
 
@@ -157,8 +157,8 @@ func main() {
 	}
 	root := &cobra.Command{
 		Use:   os.Args[0],
-		Short: "SiaCloud (MK05) Daemon v" + build.Version + " based on ScPrime",
-		Long:  "SiaCloud (MK05) Daemon v" + build.Version + " based on ScPrime",
+		Short: "SiaCloud (MK06-UI) Daemon v" + build.Version + " based on ScPrime",
+		Long:  "SiaCloud (MK06-UI) Daemon v" + build.Version + " based on ScPrime",
 		Run:   startDaemonCmd,
 	}
 
@@ -178,16 +178,17 @@ func main() {
 
 	// Set default values, which have the lowest priority.
 	root.Flags().StringVarP(&globalConfig.Spd.RequiredUserAgent, "agent", "", "ScPrime-Agent", "required substring for the user agent")
-	root.Flags().StringVarP(&globalConfig.Spd.HostAddr, "host-addr", "", ":9814", "which port the host listens on")
+	root.Flags().StringVarP(&globalConfig.Spd.HostAddr, "host-addr", "", ":9514", "which port the host listens on")
 	root.Flags().StringVarP(&globalConfig.Spd.ProfileDir, "profile-directory", "", "profiles", "location of the profiling directory")
-	root.Flags().StringVarP(&globalConfig.Spd.APIaddr, "api-addr", "", "localhost:9810", "which host:port the API server listens on")
-	root.Flags().StringVarP(&globalConfig.Spd.DataDir, "scp-data", "d", "", "location of the scprime daemon metadata directory")
+	root.Flags().StringVarP(&globalConfig.Spd.APIaddr, "api-addr", "", "localhost:9510", "which host:port the API server listens on")
+	//root.Flags().StringVarP(&globalConfig.Spd.DataDir, "scp-data", "d", "", "location of the scprime daemon metadata directory")
+	root.Flags().StringVarP(&globalConfig.Spd.DataDir, "scprime-directory", "d", "", "location of the scprime daemon metadata directory")
 	root.Flags().BoolVarP(&globalConfig.Spd.NoBootstrap, "no-bootstrap", "", false, "disable bootstrapping on this run")
 	root.Flags().StringVarP(&globalConfig.Spd.Profile, "profile", "", "", "enable profiling with flags 'cmt' for CPU, memory, trace")
-	root.Flags().StringVarP(&globalConfig.Spd.RPCaddr, "rpc-addr", "", ":9811", "which port the gateway listens on")
-	root.Flags().StringVarP(&globalConfig.Spd.SiaMuxTCPAddr, "siamux-addr", "", ":9812", "which port the SiaMux listens on")
-	root.Flags().StringVarP(&globalConfig.Spd.SiaMuxWSAddr, "siamux-addr-ws", "", ":9813", "which port the SiaMux websocket listens on")
-	root.Flags().StringVarP(&globalConfig.Spd.HostApiAddr, "host-api-addr", "", ":9815", "which port the Host API listens on")
+	root.Flags().StringVarP(&globalConfig.Spd.RPCaddr, "rpc-addr", "", ":9511", "which port the gateway listens on")
+	root.Flags().StringVarP(&globalConfig.Spd.SiaMuxTCPAddr, "siamux-addr", "", ":9512", "which port the SiaMux listens on")
+	root.Flags().StringVarP(&globalConfig.Spd.SiaMuxWSAddr, "siamux-addr-ws", "", ":9513", "which port the SiaMux websocket listens on")
+	root.Flags().StringVarP(&globalConfig.Spd.HostApiAddr, "host-api-addr", "", ":9515", "which port the Host API listens on")
 	root.Flags().StringVarP(&globalConfig.Spd.Modules, "modules", "M", "gctwrh", "enabled modules, see 'spd modules' for more info")
 	root.Flags().BoolVarP(&globalConfig.Spd.AuthenticateAPI, "authenticate-api", "", true, "enable API password protection")
 	root.Flags().BoolVarP(&globalConfig.Spd.TempPassword, "temp-password", "", false, "enter a temporary API password during startup")

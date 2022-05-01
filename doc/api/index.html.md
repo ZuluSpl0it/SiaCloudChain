@@ -17,19 +17,19 @@ search: true
 > Example GET curl call 
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/wallet/transactions?startheight=1&endheight=250"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/wallet/transactions?startheight=1&endheight=250"
 ```
 
 > Example POST curl call with data
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "amount=123&destination=abcd" "localhost:4280/wallet/siacoins"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "amount=123&destination=abcd" "localhost:9510/wallet/siacoins"
 ```
 
 > Example POST curl call without data or authentication
 
 ```go
-curl -A "ScPrime-Agent" -X POST "localhost:4280/gateway/connect/123.456.789.0:4281"
+curl -A "ScPrime-Agent" -X POST "localhost:9510/gateway/connect/123.456.789.0:9511"
 ```
 
 API calls return either JSON or no content. Success is indicated by 2xx HTTP
@@ -45,7 +45,7 @@ production.
 
 - Requests must set their User-Agent string to contain the substring
   "ScPrime-Agent".
-- By default, spd listens on "localhost:4280". This can be changed using the
+- By default, spd listens on "localhost:9510". This can be changed using the
   `--api-addr` flag when running spd.
 - **Do not bind or expose the API to a non-loopback address unless you are aware
   of the possible dangers.**
@@ -113,7 +113,7 @@ status code `491 ModuleDisabled`.
 > Example POST curl call with Authentication
 
 ```go
-curl -A "ScPrime-Agent" --user "":<apipassword> --data "amount=123&destination=abcd" "localhost:4280/wallet/siacoins"
+curl -A "ScPrime-Agent" --user "":<apipassword> --data "amount=123&destination=abcd" "localhost:9510/wallet/siacoins"
 
 ```
 
@@ -179,7 +179,7 @@ endpoint returns information about the state of the blockchain.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/consensus"
+curl -A "ScPrime-Agent" "localhost:9510/consensus"
 ```
 
 Returns information about the consensus set, such as the current block height.
@@ -286,10 +286,10 @@ Number of Hastings in one Siacoin.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/consensus/blocks?height=20032"
+curl -A "ScPrime-Agent" "localhost:9510/consensus/blocks?height=20032"
 ```
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/consensus/blocks?id=00000000000033b9eb57fa63a51adeea857e70f6415ebbfe5df2a01f0d0477f4"
+curl -A "ScPrime-Agent" "localhost:9510/consensus/blocks?id=00000000000033b9eb57fa63a51adeea857e70f6415ebbfe5df2a01f0d0477f4"
 ```
 
 Returns the block for a given id or height.
@@ -411,7 +411,7 @@ Transactions contained within the block
 > curl example
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/consensus/subscribe/0000000000000000000000000000000000000000000000000000000000000000"
+curl -A "ScPrime-Agent" "localhost:9510/consensus/subscribe/0000000000000000000000000000000000000000000000000000000000000000"
 ```
 
 Streams a series of consensus changes, starting from the provided change ID.
@@ -438,7 +438,7 @@ A concatenation of ScPrime-encoded (binary) modules.ConsensusChange objects.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" --data "[JSON-encoded-txnset]" "localhost:4280/validate/transactionset"
+curl -A "ScPrime-Agent" --data "[JSON-encoded-txnset]" "localhost:9510/validate/transactionset"
 ```
 
 validates a set of transactions using the current utxo set.
@@ -462,7 +462,7 @@ the rest of ScPrime.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/daemon/alerts"
+curl -A "ScPrime-Agent" "localhost:9510/daemon/alerts"
 ```
 
 Returns all alerts of all severities of the ScPrime instance sorted by severity from highest to lowest in `alerts` and the alerts sorted by category in `criticalalerts`, `erroralerts` and `warningalerts`.
@@ -510,7 +510,7 @@ that are about to expire due to that.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/daemon/constants"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/daemon/constants"
 ```
 
 Returns the some of the constants that the ScPrime daemon uses. 
@@ -655,7 +655,7 @@ define 10^27 of these a scprimecoin.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/daemon/settings"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/daemon/settings"
 ```
 Returns the settings for the daemon
 
@@ -719,7 +719,7 @@ Current stack trace.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "maxdownloadspeed=1000000&maxuploadspeed=20000" "localhost:4280/daemon/settings"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "maxdownloadspeed=1000000&maxuploadspeed=20000" "localhost:9510/daemon/settings"
 ```
 
 Modify settings that control the daemon's behavior.
@@ -740,7 +740,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/daemon/stop"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/daemon/stop"
 ```
 
 Cleanly shuts down the daemon. This may take a few seconds.
@@ -753,7 +753,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/daemon/update"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/daemon/update"
 ```
 Returns the the status of any updates available for the daemon
 
@@ -777,7 +777,7 @@ Version is the version of the latest release.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/daemon/update"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/daemon/update"
 ```
 Updates the daemon to the latest available version release.
 
@@ -789,7 +789,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/daemon/version"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/daemon/version"
 ```
 
 Returns the version of the ScPrime daemon currently running. 
@@ -817,7 +817,7 @@ peers on its own.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/gateway"
+curl -A "ScPrime-Agent" "localhost:9510/gateway"
 ```
 
 returns information about the gateway, including the list of connected peers.
@@ -827,12 +827,12 @@ returns information about the gateway, including the list of connected peers.
  
 ```JSON
 {
-    "netaddress":"333.333.333.333:4281",  // string
+    "netaddress":"333.333.333.333:9511",  // string
     "peers":[
         {
             "inbound":    false,                   // boolean
             "local":      false,                   // boolean
-            "netaddress": "222.222.222.222:4281",  // string
+            "netaddress": "222.222.222.222:9511",  // string
             "version":    "1.0.0",                 // string
         },
     ],
@@ -879,7 +879,7 @@ Max upload speed permitted in bytes per second
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "maxdownloadspeed=1000000&maxuploadspeed=20000" "localhost:4280/gateway"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "maxdownloadspeed=1000000&maxuploadspeed=20000" "localhost:9510/gateway"
 ```
 
 Modify settings that control the gateway's behavior.
@@ -901,7 +901,7 @@ responses](#standard-responses).
 > curl example
 
 ```sh
-curl -A "ScPrime-Agent" "localhost:4280/gateway/bandwidth"
+curl -A "ScPrime-Agent" "localhost:9510/gateway/bandwidth"
 ```
 
 returns the total upload and download bandwidth usage for the gateway
@@ -933,7 +933,7 @@ bandwidth is not currently persisted this will be startup timestamp.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -X POST "localhost:4280/gateway/connect/123.456.789.0:4281"
+curl -A "ScPrime-Agent" -X POST "localhost:9510/gateway/connect/123.456.789.0:9511"
 ```
 
 connects the gateway to a peer. The peer is added to the node list if it is not
@@ -958,7 +958,7 @@ responses](#Standard-Responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:4280/gateway/disconnect/123.456.789.0:4281"
+curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:9510/gateway/disconnect/123.456.789.0:9511"
 ```
 
 disconnects the gateway from a peer. The peer remains in the node list.
@@ -983,7 +983,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/gateway/blocklist"
+curl -A "ScPrime-Agent" "localhost:9510/gateway/blocklist"
 ```
 
 fetches the list of blocklisted addresses.
@@ -1008,10 +1008,10 @@ blocklist is a list of blocklisted addresses
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data '{"action":"append","addresses":["123.123.123.123","123.123.123.123","123.123.123.123"]}' "localhost:4280/gateway/blocklist"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data '{"action":"append","addresses":["123.123.123.123","123.123.123.123","123.123.123.123"]}' "localhost:9510/gateway/blocklist"
 ```
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data '{"action":"set","addresses":[]}' "localhost:4280/gateway/blocklist"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data '{"action":"set","addresses":[]}' "localhost:9510/gateway/blocklist"
 ```
 
 performs actions on the Gateway's blocklist. There are three `actions` that can
@@ -1047,7 +1047,7 @@ announcing to the network, and managing how files are stored on disk.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/host"
+curl -A "ScPrime-Agent" "localhost:9510/host"
 ```
 
 fetches status information about the host.
@@ -1062,7 +1062,7 @@ fetches status information about the host.
     "maxdownloadbatchsize": 17825792,             // bytes
     "maxduration":          25920,                // blocks
     "maxrevisebatchsize":   17825792,             // bytes
-    "netaddress":           "123.456.789.0:4282", // string
+    "netaddress":           "123.456.789.0:9514", // string
     "remainingstorage":     35000000000,          // bytes
     "sectorsize":           4194304,              // bytes
     "totalstorage":         35000000000,          // bytes
@@ -1105,7 +1105,7 @@ fetches status information about the host.
     "maxdownloadbatchsize": 17825792,             // bytes
     "maxduration":          25920,                // blocks
     "maxrevisebatchsize":   17825792,             // bytes
-    "netaddress":           "123.456.789.0:4282", // string
+    "netaddress":           "123.456.789.0:9514", // string
     "windowsize":           144,                  // blocks
     
     "collateral":       "57870370370",                     // hastings / byte / block
@@ -1462,7 +1462,7 @@ Public key used to identify the host.
 > curl example
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/host/bandwidth"
+curl -A "ScPrime-Agent" "localhost:9510/host/bandwidth"
 ```
 
 returns the total upload and download bandwidth usage for the host
@@ -1492,7 +1492,7 @@ bandwidth is not currently persisted this will be startup timestamp.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:4280/host?acceptingcontracts=true&maxduration=12096&windowsize=1008"
+curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:9510/host?acceptingcontracts=true&maxduration=12096&windowsize=1008"
 ```
 
 Configures hosting parameters. All parameters are optional; unspecified
@@ -1619,12 +1619,12 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:4280/host/announce"
+curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:9510/host/announce"
 ```
 > curl example with a custom netaddress
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:4280/host/announce?netaddress=siahost.example.net"
+curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:9510/host/announce?netaddress=siahost.example.net"
 ```
 
 Announce the host to the network as a source of storage. Generally only needs to
@@ -1649,7 +1649,7 @@ responses](#Standard-Responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/host/contracts"
+curl -A "ScPrime-Agent" "localhost:9510/host/contracts"
 ```
 
 
@@ -1661,7 +1661,7 @@ based on their needs.
 > curl example
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/host/contracts/75868cef0d7462bf8047f9ad7380ccd73a84e6c65ccf88cf237646ce240e9d6c"
+curl -A "ScPrime-Agent" "localhost:9510/host/contracts/75868cef0d7462bf8047f9ad7380ccd73a84e6c65ccf88cf237646ce240e9d6c"
 ```
 
 Returns a storage obligation matching the contract id from the host's contracts. 
@@ -1803,7 +1803,7 @@ The payouts that the host and renter will receive if a proof is not confirmed on
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/host/storage"
+curl -A "ScPrime-Agent" "localhost:9510/host/storage"
 ```
 
 Gets a list of folders tracked by the host's storage manager.
@@ -1851,7 +1851,7 @@ Number of successful read & write operations.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "path=foo/bar&size=1000000000000" "localhost:4280/host/storage/folders/add"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "path=foo/bar&size=1000000000000" "localhost:9510/host/storage/folders/add"
 ```
 
 adds a storage folder to the manager. The manager may not check that there is
@@ -1880,7 +1880,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "path=foo/bar&force=false" "localhost:4280/host/storage/folders/remove"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "path=foo/bar&force=false" "localhost:9510/host/storage/folders/remove"
 ```
 
 Remove a storage folder from the manager. All storage on the folder will be
@@ -1909,7 +1909,7 @@ responses](#standard-responses).
 > curl example  
 
 ```sh
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "path=foo/bar&newsize=1000000000000" "localhost:4280/host/storage/folders/resize"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "path=foo/bar&newsize=1000000000000" "localhost:9510/host/storage/folders/resize"
 ```
 
 Grows or shrinks a storage file in the manager. The manager may not check that
@@ -1940,7 +1940,7 @@ responses](#standard-responses).
 > curl example  
 
 ```sh
-curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:4280/host/storage/sectors/delete/[merkleroot]"
+curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:9510/host/storage/sectors/delete/[merkleroot]"
 ```
 
 Deletes a sector, meaning that the manager will be unable to upload that sector
@@ -1963,7 +1963,7 @@ responses](#standard-responses).
 > curl example  
 
 ```sh
-curl -A "ScPrime-Agent" "localhost:4280/host/estimatescore"
+curl -A "ScPrime-Agent" "localhost:9510/host/estimatescore"
 ```
 
 Returns the estimated HostDB score of the host using its current settings,
@@ -2015,7 +2015,7 @@ identifies hosts by their public key and keeps track of metrics such as price.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/hostdb"
+curl -A "ScPrime-Agent" "localhost:9510/hostdb"
 ```
 
 Shows some general information about the state of the hostdb.
@@ -2035,7 +2035,7 @@ indicates if all known hosts have been scanned at least once.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/hostdb/active"
+curl -A "ScPrime-Agent" "localhost:9510/hostdb/active"
 ```
 
 lists all of the active hosts known to the renter, sorted by preference.
@@ -2058,7 +2058,7 @@ there are insufficient active hosts. Optional, the default is all active hosts.
       "maxdownloadbatchsize":   17825792,             // bytes
       "maxduration":            25920,                // blocks
       "maxrevisebatchsize":     17825792,             // bytes
-      "netaddress":             "123.456.789.0:4282"  // string 
+      "netaddress":             "123.456.789.0:9514"  // string 
       "remainingstorage":       35000000000,          // bytes
       "sectorsize":             4194304,              // bytes
       "totalstorage":           35000000000,          // bytes
@@ -2245,7 +2245,7 @@ Indicates if the host is currently being filtered from the HostDB
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/hostdb/all"
+curl -A "ScPrime-Agent" "localhost:9510/hostdb/all"
 ```
 
 Lists all of the hosts known to the renter. Hosts are not guaranteed to be in
@@ -2258,7 +2258,7 @@ Response is the same as [`/hostdb/active`](#hosts)
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/hostdb/hosts/ed25519:8a95848bc71e9689e2f753c82c35dc47a1d62867f77c0113ebb6fa5b51723215"
+curl -A "ScPrime-Agent" "localhost:9510/hostdb/hosts/ed25519:8a95848bc71e9689e2f753c82c35dc47a1d62867f77c0113ebb6fa5b51723215"
 ```
 
 fetches detailed information about a particular host, including metrics
@@ -2271,7 +2271,7 @@ overall.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/hostdb/hosts/<pubkey>"
+curl -A "ScPrime-Agent" "localhost:9510/hostdb/hosts/<pubkey>"
 ```
 ### REQUIRED
 **pubkey**  
@@ -2379,7 +2379,7 @@ always the one with the highest score.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" --user "":<apipassword> "localhost:4280/hostdb/filtermode"
+curl -A "ScPrime-Agent" --user "":<apipassword> "localhost:9510/hostdb/filtermode"
 ```  
 Returns the current filter mode of the hostDB and any filtered hosts.
 
@@ -2406,10 +2406,10 @@ Comma separated pubkeys.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" --user "":<apipassword> --data '{"filtermode" : "whitelist","hosts" : ["ed25519:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef","ed25519:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef","ed25519:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"]}' "localhost:4280/hostdb/filtermode"
+curl -A "ScPrime-Agent" --user "":<apipassword> --data '{"filtermode" : "whitelist","hosts" : ["ed25519:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef","ed25519:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef","ed25519:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"]}' "localhost:9510/hostdb/filtermode"
 ```  
 ```go
-curl -A "ScPrime-Agent" --user "":<apipassword> --data '{"filtermode" : "disable"}' "localhost:4280/hostdb/filtermode"
+curl -A "ScPrime-Agent" --user "":<apipassword> --data '{"filtermode" : "disable"}' "localhost:9510/hostdb/filtermode"
 ```
 Lets you enable and disable a filter mode for the hostdb. Currently the two
 modes supported are `blacklist` mode and `whitelist` mode. In `blacklist` mode,
@@ -2455,7 +2455,7 @@ basic CPU mining implementation.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/miner"
+curl -A "ScPrime-Agent" "localhost:9510/miner"
 ```
 returns the status of the miner.
 
@@ -2489,7 +2489,7 @@ had its chain extended first.
 > curl example  
 
 ```sh
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/miner/start"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/miner/start"
 ```
 
 Starts a single threaded CPU miner. Does nothing if the CPU miner is already
@@ -2504,7 +2504,7 @@ responses](#standard-responses).
 > curl example  
 
 ```sh
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/miner/stop"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/miner/stop"
 ```
 
 stops the cpu miner. Does nothing if the cpu miner is not running.
@@ -2518,7 +2518,7 @@ responses](#standard-responses).
 > curl example  
 
 ```sh
-curl -A "ScPrime-Agent" -data "<byte-encoded-block>" -u "":<apipassword> "localhost:4280/miner/block"
+curl -A "ScPrime-Agent" -data "<byte-encoded-block>" -u "":<apipassword> "localhost:9510/miner/block"
 ```
 
 Submits a solved block and broadcasts it.
@@ -2538,7 +2538,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/miner/header"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/miner/header"
 ```
 
 provides a block header that is ready to be grinded on for work.
@@ -2575,7 +2575,7 @@ merkle root | [80-112) | [48-80)
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -data "<byte-encoded-header>" -u "":<apipassword> "localhost:4280/miner"
+curl -A "ScPrime-Agent" -data "<byte-encoded-header>" -u "":<apipassword> "localhost:9510/miner"
 ```
 
 submits a header that has passed the POW.
@@ -2620,7 +2620,7 @@ allocated funds.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/renter"
+curl -A "ScPrime-Agent" "localhost:9510/renter"
 ```
 
 Returns the current settings along with metrics on the renter's spending.
@@ -2816,7 +2816,7 @@ The time at which the pause will end.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "period=12096&renewwindow=4032&funds=1000&hosts=50" "localhost:4280/renter"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "period=12096&renewwindow=4032&funds=1000&hosts=50" "localhost:9510/renter"
 ```
 
 Modify settings that control the renter's behavior.
@@ -2845,7 +2845,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword>  "localhost:4280/renter/allowance/cancel"
+curl -A "ScPrime-Agent" -u "":<apipassword>  "localhost:9510/renter/allowance/cancel"
 ```
 
 Cancel the Renter's allowance.
@@ -2859,7 +2859,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "id=bd7ef21b13fb85eda933a9ff2874ec50a1ffb4299e98210bf0dd343ae1632f80" "localhost:4280/renter/contract/cancel"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "id=bd7ef21b13fb85eda933a9ff2874ec50a1ffb4299e98210bf0dd343ae1632f80" "localhost:9510/renter/contract/cancel"
 ```
 
 cancels a specific contract of the Renter.
@@ -2878,7 +2878,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "destination=/home/backups/01-01-1968.backup" "localhost:4280/renter/backup"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "destination=/home/backups/01-01-1968.backup" "localhost:9510/renter/backup"
 ```
 
 Creates a backup of all siafiles in the renter at the specified path.
@@ -2902,7 +2902,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "source=/home/backups/01-01-1968.backup" "localhost:4280/renter/recoverbackup"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "source=/home/backups/01-01-1968.backup" "localhost:9510/renter/recoverbackup"
 ```
 
 Recovers an existing backup from the specified path by adding all the siafiles
@@ -2929,7 +2929,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/renter/uploadedbackups"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/renter/uploadedbackups"
 ```
 
 Lists the backups that have been uploaded to hosts.
@@ -2962,7 +2962,7 @@ Unix timestamp of when the backup was created.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/renter/contracts?disabled=true&expired=true&recoverable=false"
+curl -A "ScPrime-Agent" "localhost:9510/renter/contracts?disabled=true&expired=true&recoverable=false"
 ```
 
 Returns the renter's contracts. Active, passive, and refreshed contracts are
@@ -3112,7 +3112,7 @@ acknowldege that the contract exists.
 > curl example
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/renter/contractstatus?id=<filecontractid>"
+curl -A "ScPrime-Agent" "localhost:9510/renter/contractstatus?id=<filecontractid>"
 ```
 
 ### Query String Parameters
@@ -3169,7 +3169,7 @@ The height at which the storage proof window for this contract ends.
 > curl example
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/renter/contractorchurnstatus"
+curl -A "ScPrime-Agent" "localhost:9510/renter/contractorchurnstatus"
 ```
 
 Returns the churn status for the renter's contractor.
@@ -3196,7 +3196,7 @@ Maximum allowed aggregate churn per period.
 > curl example
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/renter/setmaxperiodchurn?newmax=123456789"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/renter/setmaxperiodchurn?newmax=123456789"
 ```
 
 sets the new max churn per period.
@@ -3217,10 +3217,10 @@ standard success or error response. See [standard responses](#standard-responses
 will return the root siadir information.  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/renter/dir/"
+curl -A "ScPrime-Agent" "localhost:9510/renter/dir/"
 ```  
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/renter/dir/mydir"
+curl -A "ScPrime-Agent" "localhost:9510/renter/dir/mydir"
 ```
 
 retrieves the contents of a directory on the ScPrime network
@@ -3313,7 +3313,7 @@ The health of the most in need siafile in the directory, stuck or not stuck
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "action=delete" "localhost:4280/renter/dir/mydir"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "action=delete" "localhost:9510/renter/dir/mydir"
 ```
 
 performs various functions on the renter's directories
@@ -3358,7 +3358,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/renter/downloadinfo/9d8dd0d5b306f5bb412230bd12b590ae"
+curl -A "ScPrime-Agent" "localhost:9510/renter/downloadinfo/9d8dd0d5b306f5bb412230bd12b590ae"
 ```
 
 Lists a file in the download history by UID.
@@ -3439,7 +3439,7 @@ well as data from failed piece downloads.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/renter/downloads"
+curl -A "ScPrime-Agent" "localhost:9510/renter/downloads"
 ```
 
 Lists all files in the download queue.
@@ -3518,7 +3518,7 @@ well as data from failed piece downloads.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:4280/renter/downloads/clear?before=1551398400&after=1552176000"
+curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:9510/renter/downloads/clear?before=1551398400&after=1552176000"
 ```
 
 Clears the download history of the renter for a range of unix time stamps.  Both
@@ -3545,7 +3545,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/renter/prices"
+curl -A "ScPrime-Agent" "localhost:9510/renter/prices"
 ```
 
 Lists the estimated prices of performing various storage and data operations. An
@@ -3597,7 +3597,7 @@ The allowance settings used for the estimation are also returned, see the fields
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/renter/files?cached=false"
+curl -A "ScPrime-Agent" "localhost:9510/renter/files?cached=false"
 ```
 
 ### Query String Parameters
@@ -3735,7 +3735,7 @@ progress is 100.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/renter/file/myfile"
+curl -A "ScPrime-Agent" "localhost:9510/renter/file/myfile"
 ```
 
 Lists the status of specified file.
@@ -3752,7 +3752,7 @@ Same response as [files](#files)
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "trackingpath=/home/myfile" "localhost:4280/renter/file/myfile"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "trackingpath=/home/myfile" "localhost:9510/renter/file/myfile"
 ```
 
 endpoint for changing file metadata.
@@ -3779,7 +3779,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:4280/renter/delete/myfile"
+curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:9510/renter/delete/myfile"
 ```
 
 deletes a renter file entry. Does not delete any downloads or original files,
@@ -3805,7 +3805,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/renter/download/myfile?httpresp=true"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/renter/download/myfile?httpresp=true"
 ```
 
 downloads a file to the local filesystem. The call will block until the file has
@@ -3853,7 +3853,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/renter/download/cancel?id=<downloadid>"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/renter/download/cancel?id=<downloadid>"
 ```
 
 cancels the download with the given id.
@@ -3872,7 +3872,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/renter/downloadasync/myfile?destination=/home/myfile"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/renter/downloadasync/myfile?destination=/home/myfile"
 ```
 
 downloads a file to the local filesystem. The call will return immediately.
@@ -3896,7 +3896,7 @@ responses](#standard-responses).
 > curl example  
 
 ```bash
-curl -A "ScPrime-Agent" "localhost:4280/renter/fuse"
+curl -A "ScPrime-Agent" "localhost:9510/renter/fuse"
 ```
 
 Lists the set of folders that have been mounted to the user's filesystem and
@@ -3930,7 +3930,7 @@ The siapath that has been mounted to the mountpoint.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:4280/renter/fuse/mount?readonly=true"
+curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:9510/renter/fuse/mount?readonly=true"
 ```
 
 Mounts a ScPrime directory to the local filesystem using FUSE.
@@ -3982,7 +3982,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:4280/renter/fuse/unmount?mount=/home/user/videos"
+curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:9510/renter/fuse/unmount?mount=/home/user/videos"
 ```
 
 ### Query String Parameters
@@ -3999,7 +3999,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:4280/renter/recoveryscan"
+curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:9510/renter/recoveryscan"
 ```
 
 starts a rescan of the whole blockchain to find recoverable contracts. The
@@ -4015,7 +4015,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/renter/recoveryscan"
+curl -A "ScPrime-Agent" "localhost:9510/renter/recoveryscan"
 ```
 
 Returns some information about a potentially ongoing recovery scan.
@@ -4040,9 +4040,9 @@ that have already been scanned.
 > curl example  
 
 ```sh
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "newsiapath=myfile2" "localhost:4280/renter/rename/myfile"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "newsiapath=myfile2" "localhost:9510/renter/rename/myfile"
 
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "newsiapath=myfile2&root=true" "localhost:4280/renter/rename/myfile"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "newsiapath=myfile2&root=true" "localhost:9510/renter/rename/myfile"
 ```
 
 change the siaPath for a file that is being managed by the renter.
@@ -4074,14 +4074,14 @@ responses](#standard-responses).
 > Stream the whole file.  
 
 ```sh
-curl -A "ScPrime-Agent" "localhost:4280/renter/stream/myfile"
+curl -A "ScPrime-Agent" "localhost:9510/renter/stream/myfile"
 ```  
 
 > The file can be streamed partially by using standard partial http requests
 > which means setting the "Range" field in the http header.  
 
 ```sh
-curl -A "ScPrime-Agent" -H "Range: bytes=0-1023" "localhost:4280/renter/stream/myfile"
+curl -A "ScPrime-Agent" -H "Range: bytes=0-1023" "localhost:9510/renter/stream/myfile"
 ```
 
 downloads a file using http streaming. This call blocks until the data is
@@ -4113,7 +4113,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "source=/home/myfile" "localhost:4280/renter/upload/myfile"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "source=/home/myfile" "localhost:9510/renter/upload/myfile"
 ```
 
 uploads a file to the network from the local filesystem.
@@ -4150,9 +4150,9 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/renter/uploadstream/myfile?datapieces=10&paritypieces=20" --data-binary @myfile.dat
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/renter/uploadstream/myfile?datapieces=10&paritypieces=20" --data-binary @myfile.dat
 
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/renter/uploadstream/myfile?repair=true" --data-binary @myfile.dat
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/renter/uploadstream/myfile?repair=true" --data-binary @myfile.dat
 ```
 
 uploads a file to the network using a stream. If the upload stream POST call
@@ -4191,7 +4191,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/renter/uploadready?datapieces=10&paritypieces=20"
+curl -A "ScPrime-Agent" "localhost:9510/renter/uploadready?datapieces=10&paritypieces=20"
 ```
 
 Returns the whether or not the renter is ready for upload.
@@ -4240,7 +4240,7 @@ The number of parity pieces to use when erasure coding the file.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "duration=10m" "localhost:4280/renter/uploads/pause"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "duration=10m" "localhost:9510/renter/uploads/pause"
 ```
 
 This endpoint will pause any future uploads or repairs for the duration
@@ -4266,7 +4266,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/renter/uploads/resume"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/renter/uploads/resume"
 ```
 
 This endpoint will resume uploads and repairs.
@@ -4279,7 +4279,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/renter/validatesiapath/isthis-aval_idsiapath"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/renter/validatesiapath/isthis-aval_idsiapath"
 ```
 
 validates whether or not the provided siapath is a valid siapath. Every path
@@ -4301,7 +4301,7 @@ See [standard responses](#standard-responses).
 > curl example
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/renter/workers"
+curl -A "ScPrime-Agent" "localhost:9510/renter/workers"
 ```
 
 returns the the status of all the workers in the renter's workerpool.
@@ -4501,7 +4501,7 @@ Details of the workers' has sector jobs queue
 > curl example
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/pubaccess/blacklist"
+curl -A "ScPrime-Agent" "localhost:9510/pubaccess/blacklist"
 ```
 
 returns the list of hashed merkleroots that are blacklisted. 
@@ -4532,9 +4532,9 @@ The blacklist is a list of hashed merkleroots, that are blacklisted.
 > curl example
 
 ```go
-curl -A "ScPrime-Agent" --user "":<apipassword> --data '{"add" : ["GAC38Gan6YHVpLl-bfefa7aY85fn4C0EEOt5KJ6SPmEy4g","GAC38Gan6YHVpLl-bfefa7aY85fn4C0EEOt5KJ6SPmEy4g","GAC38Gan6YHVpLl-bfefa7aY85fn4C0EEOt5KJ6SPmEy4g"]}' "localhost:4280/pubaccess/blacklist"
+curl -A "ScPrime-Agent" --user "":<apipassword> --data '{"add" : ["GAC38Gan6YHVpLl-bfefa7aY85fn4C0EEOt5KJ6SPmEy4g","GAC38Gan6YHVpLl-bfefa7aY85fn4C0EEOt5KJ6SPmEy4g","GAC38Gan6YHVpLl-bfefa7aY85fn4C0EEOt5KJ6SPmEy4g"]}' "localhost:9510/pubaccess/blacklist"
 
-curl -A "ScPrime-Agent" --user "":<apipassword> --data '{"remove" : ["GAC38Gan6YHVpLl-bfefa7aY85fn4C0EEOt5KJ6SPmEy4g","GAC38Gan6YHVpLl-bfefa7aY85fn4C0EEOt5KJ6SPmEy4g","GAC38Gan6YHVpLl-bfefa7aY85fn4C0EEOt5KJ6SPmEy4g"]}' "localhost:4280/pubaccess/blacklist"
+curl -A "ScPrime-Agent" --user "":<apipassword> --data '{"remove" : ["GAC38Gan6YHVpLl-bfefa7aY85fn4C0EEOt5KJ6SPmEy4g","GAC38Gan6YHVpLl-bfefa7aY85fn4C0EEOt5KJ6SPmEy4g","GAC38Gan6YHVpLl-bfefa7aY85fn4C0EEOt5KJ6SPmEy4g"]}' "localhost:9510/pubaccess/blacklist"
 ```
 
 updates the list of publinks that should be blacklisted from Pubaccess. This
@@ -4559,7 +4559,7 @@ responses](#standard-responses).
 > curl example
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/pubaccess/portals"
+curl -A "ScPrime-Agent" "localhost:9510/pubaccess/portals"
 ```
 
 returns the list of known Pubaccess portals.
@@ -4587,9 +4587,9 @@ Indicates whether the portal can be accessed publicly or not.
 > curl example
 
 ```go
-curl -A "ScPrime-Agent" --user "":<apipassword> --data '{"add" : [{"address":"portal.scpri.me:443","public":true}]}' "localhost:4280/pubaccess/portals"
+curl -A "ScPrime-Agent" --user "":<apipassword> --data '{"add" : [{"address":"portal.scpri.me:443","public":true}]}' "localhost:9510/pubaccess/portals"
 
-curl -A "ScPrime-Agent" --user "":<apipassword> --data '{"remove" : ["portal.scpri.me:443"]}' "localhost:4280/pubaccess/portals"
+curl -A "ScPrime-Agent" --user "":<apipassword> --data '{"remove" : ["portal.scpri.me:443"]}' "localhost:9510/pubaccess/portals"
 ```
 
 updates the list of known Public access portals. This endpoint can be used to both add
@@ -4615,7 +4615,7 @@ responses](#standard-responses).
 > curl example
 
 ```bash
-curl -I -A "ScPrime-Agent" "localhost:4280/pubaccess/publink/CABAB_1Dt0FJsxqsu_J4TodNCbCGvtFf1Uys_3EgzOlTcg"
+curl -I -A "ScPrime-Agent" "localhost:9510/pubaccess/publink/CABAB_1Dt0FJsxqsu_J4TodNCbCGvtFf1Uys_3EgzOlTcg"
 ```
 
 This curl command performs a HEAD request that fetches the headers for
@@ -4642,13 +4642,13 @@ This request has an empty response body.
 
 ```bash
 # entire file
-curl -A "ScPrime-Agent" "localhost:4280/pubaccess/publink/CABAB_1Dt0FJsxqsu_J4TodNCbCGvtFf1Uys_3EgzOlTcg"
+curl -A "ScPrime-Agent" "localhost:9510/pubaccess/publink/CABAB_1Dt0FJsxqsu_J4TodNCbCGvtFf1Uys_3EgzOlTcg"
 
 # directory
-curl -A "ScPrime-Agent" "localhost:4280/pubaccess/publink/CABAB_1Dt0FJsxqsu_J4TodNCbCGvtFf1Uys_3EgzOlTcg/folder"
+curl -A "ScPrime-Agent" "localhost:9510/pubaccess/publink/CABAB_1Dt0FJsxqsu_J4TodNCbCGvtFf1Uys_3EgzOlTcg/folder"
 
 # sub file
-curl -A "ScPrime-Agent" "localhost:4280/pubaccess/publink/CABAB_1Dt0FJsxqsu_J4TodNCbCGvtFf1Uys_3EgzOlTcg/folder/file.txt"
+curl -A "ScPrime-Agent" "localhost:9510/pubaccess/publink/CABAB_1Dt0FJsxqsu_J4TodNCbCGvtFf1Uys_3EgzOlTcg/folder/file.txt"
 ```  
 
 downloads a publink using http streaming. This call blocks until the data is
@@ -4730,7 +4730,7 @@ The response body is the raw data for the file.
 // This command uploads the file 'myImage.png' to the ScPrime folder
 // 'var/pubaccess/images/myImage.png'. Users who download the file will see the name
 // 'image.png'.
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/pubaccess/pubfile/images/myImage.png?filename=image.png" --data-binary @myImage.png
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/pubaccess/pubfile/images/myImage.png?filename=image.png" --data-binary @myImage.png
 ```
 
 uploads a file to the network using a stream. If the upload stream POST call
@@ -4858,7 +4858,7 @@ version, an offset and a length in a heavily compressed and optimized format.
 > curl example
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/pubaccess/stats"
+curl -A "ScPrime-Agent" "localhost:9510/pubaccess/stats"
 ```
 
 returns statistical information about Pubaccess, e.g. number of files uploaded
@@ -4934,7 +4934,7 @@ may change over time.
 > curl example
 
 ```go
-curl -A "ScPrime-Agent"  -u "":<apipassword> --data "pubaccesskey=BAAAAAAAAABrZXkxAAAAAAAAAAQgAAAAAAAAADiObVg49-0juJ8udAx4qMW-TEHgDxfjA0fjJSNBuJ4a" "localhost:4280/pubaccess/addpubaccesskey"
+curl -A "ScPrime-Agent"  -u "":<apipassword> --data "pubaccesskey=BAAAAAAAAABrZXkxAAAAAAAAAAQgAAAAAAAAADiObVg49-0juJ8udAx4qMW-TEHgDxfjA0fjJSNBuJ4a" "localhost:9510/pubaccess/addpubaccesskey"
 ```
 
 Stores the given pubaccesskey with the pubaccesskey manager.
@@ -4953,7 +4953,7 @@ responses](#standard-responses).
 > curl example
 
 ```go
-curl -A "ScPrime-Agent"  -u "":<apipassword> --data "localhost:4280/pubaccess/pubaccesskeys"
+curl -A "ScPrime-Agent"  -u "":<apipassword> --data "localhost:9510/pubaccess/pubaccesskeys"
 ```
 
 Returns a list of all Skykeys.
@@ -4994,7 +4994,7 @@ information.
 > curl example
 
 ```go
-curl -A "ScPrime-Agent"  -u "":<apipassword> --data "name=key_to_the_castle" "localhost:4280/pubaccess/createpubaccesskey"
+curl -A "ScPrime-Agent"  -u "":<apipassword> --data "name=key_to_the_castle" "localhost:9510/pubaccess/createpubaccesskey"
 ```
 
 Returns a new pubaccesskey created and stored under that name.
@@ -5031,7 +5031,7 @@ base-64 encoded pubaccesskey
 > curl example
 
 ```go
-curl -A "ScPrime-Agent"  -u "":<apipassword> --data "name=key_to_the_castle" "localhost:4280/pubaccess/deletepubaccesskey"
+curl -A "ScPrime-Agent"  -u "":<apipassword> --data "name=key_to_the_castle" "localhost:9510/pubaccess/deletepubaccesskey"
 ```
 
 Deletes the pubaccesskey with that name or ID.
@@ -5057,8 +5057,8 @@ See [standard responses](#standard-responses).
 > curl example
 
 ```go
-curl -A "ScPrime-Agent"  -u "":<apipassword> --data "name=cellar_access_key" "localhost:4280/pubaccess/pubaccesskey"
-curl -A "ScPrime-Agent"  -u "":<apipassword> --data "id=gi5z8cf5NWbcvPBaBn0DFQ==" "localhost:4280/pubaccess/pubaccesskey"
+curl -A "ScPrime-Agent"  -u "":<apipassword> --data "name=cellar_access_key" "localhost:9510/pubaccess/pubaccesskey"
+curl -A "ScPrime-Agent"  -u "":<apipassword> --data "id=gi5z8cf5NWbcvPBaBn0DFQ==" "localhost:9510/pubaccess/pubaccesskey"
 ```
 
 Returns the base-64 encoded public access key along with its name and ID.
@@ -5106,7 +5106,7 @@ type information.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/tpool/confirmed/22e8d5428abc184302697929f332fa0377ace60d405c39dd23c0327dc694fae7"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/tpool/confirmed/22e8d5428abc184302697929f332fa0377ace60d405c39dd23c0327dc694fae7"
 ```
 
 returns whether the requested transaction has been seen on the blockchain. Note,
@@ -5133,7 +5133,7 @@ indicates if a transaction is confirmed on the blockchain
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/tpool/fee"
+curl -A "ScPrime-Agent" "localhost:9510/tpool/fee"
 ```
 
 returns the minimum and maximum estimated fees expected by the transaction pool.
@@ -5157,7 +5157,7 @@ the maximum estimated fee
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/tpool/raw/22e8d5428abc184302697929f332fa0377ace60d405c39dd23c0327dc694fae7"
+curl -A "ScPrime-Agent" "localhost:9510/tpool/raw/22e8d5428abc184302697929f332fa0377ace60d405c39dd23c0327dc694fae7"
 ```
 
 returns the ID for the requested transaction and its raw encoded parents and
@@ -5191,7 +5191,7 @@ raw, base64 encoded transaction data
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" --data "<raw-encoded-tset>" "localhost:4280/tpool/raw"
+curl -A "ScPrime-Agent" --data "<raw-encoded-tset>" "localhost:9510/tpool/raw"
 ```
 
 submits a raw transaction to the transaction pool, broadcasting it to the
@@ -5214,7 +5214,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/tpool/transactions"
+curl -A "ScPrime-Agent" "localhost:9510/tpool/transactions"
 ```
 
 returns the transactions of the transaction pool.
@@ -5286,7 +5286,7 @@ transaction fields.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/wallet"
+curl -A "ScPrime-Agent" "localhost:9510/wallet"
 ```
 
 Returns basic information about the wallet, such as whether the wallet is locked
@@ -5364,7 +5364,7 @@ cannot be used because the wallet considers it a dust output.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "source=/home/legacy-wallet&encryptionpassword=mypassword" "localhost:4280/wallet/033x"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "source=/home/legacy-wallet&encryptionpassword=mypassword" "localhost:9510/wallet/033x"
 ```
 
 Loads a v0.3.3.x wallet into the current wallet, harvesting all of the secret
@@ -5388,7 +5388,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/wallet/address"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/wallet/address"
 ```
 
 Gets a new address from the wallet generated by the primary seed. An error will
@@ -5410,7 +5410,7 @@ long hex strings.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/wallet/addresses"
+curl -A "ScPrime-Agent" "localhost:9510/wallet/addresses"
 ```
 
 Fetches the list of addresses from the wallet. If the wallet has not been
@@ -5437,7 +5437,7 @@ Array of wallet addresses owned by the wallet.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/wallet/seedaddrs"
+curl -A "ScPrime-Agent" "localhost:9510/wallet/seedaddrs"
 ```
 
 Fetches addresses generated by the wallet in reverse order. The last address
@@ -5471,7 +5471,7 @@ Array of wallet addresses previously generated by the wallet.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/wallet/backup?destination=/home/wallet-settings.backup"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/wallet/backup?destination=/home/wallet-settings.backup"
 ```
 
 Creates a backup of the wallet settings file. Though this can easily be done
@@ -5493,7 +5493,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:4280/wallet/changepassword?encryptionpassword=<currentpassword>&newpassword=<newpassword>"
+curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:9510/wallet/changepassword?encryptionpassword=<currentpassword>&newpassword=<newpassword>"
 ```
 
 Changes the wallet's encryption key.  
@@ -5516,7 +5516,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "encryptionpassword=<password>&force=false" "localhost:4280/wallet/init"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "encryptionpassword=<password>&force=false" "localhost:9510/wallet/init"
 ```
 
 Initializes the wallet. After the wallet has been initialized once, it does not
@@ -5554,7 +5554,7 @@ Wallet seed used to generate addresses that the wallet is able to spend.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "seed=<seed>&encryptionpassword=<password>&force=false" "localhost:4280/wallet/init/seed"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "seed=<seed>&encryptionpassword=<password>&force=false" "localhost:9510/wallet/init/seed"
 ```
 
 Initializes the wallet using a preexisting seed. After the wallet has been
@@ -5583,7 +5583,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "seed=<seed>" "localhost:4280/wallet/seed"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "seed=<seed>" "localhost:9510/wallet/seed"
 ```
 
 Gives the wallet a seed to track when looking for incoming transactions. The
@@ -5607,7 +5607,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/wallet/seeds"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/wallet/seeds"
 ```
 
 Returns the list of seeds in use by the wallet. The primary seed is the only
@@ -5651,7 +5651,7 @@ however only the primary seed is being used to generate new addresses.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "amount=1000&destination=c134a8372bd250688b36867e6522a37bdc391a344ede72c2a79206ca1c34c84399d9ebf17773" "localhost:4280/wallet/siacoins"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "amount=1000&destination=c134a8372bd250688b36867e6522a37bdc391a344ede72c2a79206ca1c34c84399d9ebf17773" "localhost:9510/wallet/siacoins"
 ```
 
 Sends siacoins to an address or set of addresses. The outputs are arbitrarily
@@ -5753,7 +5753,7 @@ Array of IDs of the transactions that were created when sending the coins.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "amount=10&destination=c134a8372bd250688b36867e6522a37bdc391a344ede72c2a79206ca1c34c84399d9ebf17773" "localhost:4280/wallet/siafunds"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "amount=10&destination=c134a8372bd250688b36867e6522a37bdc391a344ede72c2a79206ca1c34c84399d9ebf17773" "localhost:9510/wallet/siafunds"
 ```
 
 Sends siafunds to an address. The outputs are arbitrarily selected from
@@ -5847,7 +5847,7 @@ Array of IDs of the transactions that were created when sending the coins.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "encryptionpassword=<password>&keyfiles=/file1,/home/file2" "localhost:4280/wallet/siagkey"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "encryptionpassword=<password>&keyfiles=/file1,/home/file2" "localhost:9510/wallet/siagkey"
 ```
 
 Loads a key into the wallet that was generated by siag. Most siafunds are
@@ -5873,7 +5873,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "<requestbody>" "localhost:4280/wallet/sign"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "<requestbody>" "localhost:9510/wallet/sign"
 ```
 
 Signs a transaction. The wallet will attempt to sign each input specified. The
@@ -5970,7 +5970,7 @@ will add signatures for every TransactionSignature that it has keys for.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "seed=<seed>" "localhost:4280/wallet/sweep/seed"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "seed=<seed>" "localhost:9510/wallet/sweep/seed"
 ```
 
 Scans the blockchain for outputs belonging to a seed and send them to an address
@@ -6007,7 +6007,7 @@ Number of siafunds transferred to the wallet as a result of the sweep.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:4280/wallet/lock"
+curl -A "ScPrime-Agent" -u "":<apipassword> -X POST "localhost:9510/wallet/lock"
 ```
 
 Locks the wallet, wiping all secret keys. After being locked, the keys are
@@ -6024,7 +6024,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/wallet/transaction/22e8d5428abc184302697929f332fa0377ace60d405c39dd23c0327dc694fae7"
+curl -A "ScPrime-Agent" "localhost:9510/wallet/transaction/22e8d5428abc184302697929f332fa0377ace60d405c39dd23c0327dc694fae7"
 ```
 
 Gets the transaction associated with a specific transaction id.
@@ -6148,7 +6148,7 @@ Amount of funds that have been moved in the output.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/wallet/transactions"
+curl -A "ScPrime-Agent" "localhost:9510/wallet/transactions"
 ```
 
 Returns a list of transactions related to the wallet in chronological order.
@@ -6195,7 +6195,7 @@ See the documentation for '/wallet/transaction/:id' for more information.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/wallet/transactions/abf1ba4ad65820ce2bd5d63466b8555d0ec9bfe5f5fa920b4fef6ad98f443e2809e5ae619b74"
+curl -A "ScPrime-Agent" "localhost:9510/wallet/transactions/abf1ba4ad65820ce2bd5d63466b8555d0ec9bfe5f5fa920b4fef6ad98f443e2809e5ae619b74"
 ```
 
 Returns all of the transactions related to a specific address.
@@ -6226,7 +6226,7 @@ See the documentation for '/wallet/transaction/:id' for more information.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "encryptionpassword=<password>" "localhost:4280/wallet/unlock"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "encryptionpassword=<password>" "localhost:9510/wallet/unlock"
 ```
 
 Unlocks the wallet. The wallet is capable of knowing whether the correct
@@ -6247,7 +6247,7 @@ responses](#standard-responses).
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/wallet/unlockconditions/2d6c6d705c80f17448d458e47c3fb1a02a24e018a82d702cda35262085a3167d98cc7a2ba339"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/wallet/unlockconditions/2d6c6d705c80f17448d458e47c3fb1a02a24e018a82d702cda35262085a3167d98cc7a2ba339"
 ```
 
 Returns the unlock conditions of :addr, if they are known to the wallet.
@@ -6285,7 +6285,7 @@ The set of keys whose signatures count towards signaturesrequired.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/wallet/unspent"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/wallet/unspent"
 ```
 
 Returns a list of outputs that the wallet can spend.
@@ -6334,7 +6334,7 @@ Whether the output comes from a watched address or from the wallet's seed.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/wallet/verify/address/75d9a7351022681ba3539d7e0c5699d143ab5a7747604998cace1299ab6c04c5ea2aa2e87aac"
+curl -A "ScPrime-Agent" "localhost:9510/wallet/verify/address/75d9a7351022681ba3539d7e0c5699d143ab5a7747604998cace1299ab6c04c5ea2aa2e87aac"
 ```
 
 Takes the address specified by :addr and returns a JSON response indicating if
@@ -6360,7 +6360,7 @@ valid indicates if the address supplied to :addr is a valid UnlockHash.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" "localhost:4280/wallet/verifypassword?password=<password>"
+curl -A "ScPrime-Agent" "localhost:9510/wallet/verifypassword?password=<password>"
 ```
 
 Takes a password and verifies if it is the password used to encrypt the wallet.
@@ -6386,7 +6386,7 @@ wallet.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:4280/wallet/watch"
+curl -A "ScPrime-Agent" -u "":<apipassword> "localhost:9510/wallet/watch"
 ```
 
 Returns the set of addresses that the wallet is watching. This set only includes
@@ -6411,7 +6411,7 @@ The addresses currently watched by the wallet.
 > curl example  
 
 ```go
-curl -A "ScPrime-Agent" -u "":<apipassword> --data "<requestbody>" "localhost:4280/wallet/watch"
+curl -A "ScPrime-Agent" -u "":<apipassword> --data "<requestbody>" "localhost:9510/wallet/watch"
 ```
 
 Update the set of addresses for the wallet to watch.
